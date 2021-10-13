@@ -7,7 +7,7 @@ public class personMain {
 		// Person 클래스의 인스턴스 생성
 		Person p = new Person();
 		
-
+		
 		p.setMemberName("손흥민");
 		p.setPhoneNumber("010-7777-7777");
 		p.setJuminNumber(9912121111111L);
