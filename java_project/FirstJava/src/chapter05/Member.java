@@ -114,8 +114,8 @@ public class Member {
 	}
 	
 	public static void main(String[] args) {
-		Member m1 = new Member("김현우", 01011111111, "컴퓨터", "3학년", "gusdn@gamil.com", 1000, "서울시");
-		Member m2 = new Member("김현우", 01011111111, "컴퓨터", "3학년", "gusdn@gamil.com");
+		Member m1 = new Member("김현우", 01011111111, "컴퓨터", "3학년", "gusdn@gmail.com", 1000, "서울시");
+		Member m2 = new Member("김현우", 01011111111, "컴퓨터", "3학년", "gusdn@gmail.com");
 		m1.printAll(m1);
 		System.out.println("----------------------------");
 		m2.printAll(m2);
