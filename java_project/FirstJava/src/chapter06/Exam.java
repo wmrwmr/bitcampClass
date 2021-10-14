@@ -1,6 +1,5 @@
 package chapter06;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 //문제 1. 
@@ -18,20 +17,30 @@ public class Exam {
 
 	public static int miniValue(int[] arr) {
 
-		Arrays.sort(arr);
+		int miniVal = arr[0];
 
-		int mini = arr[0];
+		for (int i = 0; i < arr.length; i++) {
 
-		return mini;
+			if (arr[i] < miniVal) {// 300 100 50 500 400
+				miniVal = arr[i];
+			}
+		}
+		return miniVal;
 	}
 
 	public static int maxValue(int[] arr) {
 
-		Arrays.sort(arr);
+		int maxVal = arr[0];
 
-		int max = arr[arr.length - 1];
+		for (int i = 0; i < arr.length; i++) {
 
-		return max;
+			if (arr[i] > maxVal) {
+				maxVal = arr[i];
+			}
+
+		}
+		return maxVal;
+
 	}
 
 	public static void main(String[] args) {
