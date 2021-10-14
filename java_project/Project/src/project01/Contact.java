@@ -7,7 +7,7 @@ public class Contact {
 	private String name;
 	private String phoneNumber;
 	private String email;
-	private String adress;
+	private String address;
 	private String birthYear;
 	private String group;
 
@@ -15,12 +15,12 @@ public class Contact {
 
 	}
 
-	public Contact(String name, String phoneNumber, String email, String adress, String birthYear, String group) {
+	public Contact(String name, String phoneNumber, String email, String address, String birthYear, String group) {
 
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.adress = adress;
+		this.address = address;
 		this.birthYear = birthYear;
 		this.group = group;
 	}
@@ -49,12 +49,12 @@ public class Contact {
 		this.email = email;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getBirthYear() {
@@ -81,7 +81,7 @@ public class Contact {
 		System.out.println("이름: " + c1.getName());
 		System.out.println("전화번호: " + c1.getPhoneNumber());
 		System.out.println("이메일: " + c1.getEmail());
-		System.out.println("주소: " + c1.getAdress());
+		System.out.println("주소: " + c1.getAddress());
 		System.out.println("생일: " + c1.getBirthYear());
 		System.out.println("그룹: " + c1.getGroup());
 
@@ -100,7 +100,7 @@ public class Contact {
 
 		System.out.println("주소를 입력해주세요");
 		System.out.println("> ");
-		c1.setAdress(scanner.nextLine());
+		c1.setAddress(scanner.nextLine());
 
 		System.out.println("생일을 입력해주세요");
 		System.out.println("> ");
@@ -113,7 +113,7 @@ public class Contact {
 		System.out.println("이름: " + c1.getName());
 		System.out.println("전화번호: " + c1.getPhoneNumber());
 		System.out.println("이메일: " + c1.getEmail());
-		System.out.println("주소: " + c1.getAdress());
+		System.out.println("주소: " + c1.getAddress());
 		System.out.println("생일: " + c1.getBirthYear());
 		System.out.println("그룹: " + c1.getGroup());
 
