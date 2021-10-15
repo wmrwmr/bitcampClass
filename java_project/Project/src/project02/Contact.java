@@ -1,6 +1,6 @@
 package project02;
 
-import java.util.Scanner;
+
 //프로젝트-1 에서 정의한 Contact 클래스를 기반으로 아래 요구사항을 추가해서 프로그램을 작성 합니다.
 //
 //1. SmartPhone 클래스를 정의합니다. 이 클래스는 연락처 정보를 관리하는 클래스입니다.
@@ -17,7 +17,6 @@ import java.util.Scanner;
 
 public class Contact {
 
-	private int id;
 	private String name;
 	private String phoneNumber;
 	private String email;
@@ -25,18 +24,13 @@ public class Contact {
 	private String birthDay;
 	private String group;
 
-	public Contact(Contact c) {
-
-	}
-
 	public Contact() {
 
 	}
 
-	public Contact(int id, String name, String phoneNumber, String email, String address, String birthDay,
+	public Contact(String name, String phoneNumber, String email, String address, String birthDay,
 			String group) {
 
-		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
@@ -45,17 +39,6 @@ public class Contact {
 		this.group = group;
 	}
 
-	public void setSmarthPhone() {
-		this.setSmarthPhone();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

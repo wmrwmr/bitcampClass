@@ -18,6 +18,18 @@ public class Student {
 	private int english;
 	private int math;
 
+	public Student(String name, int korean, int english, int math) {
+		super();
+		this.name = name;
+		this.korean = korean;
+		this.english = english;
+		this.math = math;
+	}
+
+	public Student() {
+
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -50,17 +62,19 @@ public class Student {
 		this.math = math;
 	}
 
-	public int sum(Student s) {
+	public int sum() {
 
-		int sum = s.getKorean() + s.getEnglish() + s.getMath();
-		return sum;
+		return this.korean + this.english + this.math;
 	}
 
-	public double average(Student s) {
+	public float average() {
 
-		int sum = s.getKorean() + s.getEnglish() + s.getMath();
-		double average = (double) sum / 3;
-		return average;
+		return sum() / 3.0f;
+	}
+
+	@Override
+	public String toString() {
+		return name + "\t" + korean + "\t" + english + "\t" + math + "\t" + sum() + "\t" + average() + "\t";
 	}
 
 	public static void main(String[] args) {
@@ -69,25 +83,36 @@ public class Student {
 		//
 		// ①Student 타입의 배열을 선언하고, 요소 10개를 저장할 수 있는 배열 인스턴스를 생성해 봅시다.
 		//
-		Student[] s = new Student[10];
+		Student[] score = new Student[10];// null null null null
+
+		int numOfStudent = 0; // 입력된 학생의 수 , 배열에 입력할 때 index로 사용
+
 		// ②Student 타입의 인스턴스를 생성하고 배열에 저장하는 코드를 정의해봅시다.
 		//
 
-		Student s1 = new Student();
-		s1.setName("홍길동");
-		s1.setKorean(80);
-		s1.setEnglish(70);
-		s1.setMath(90);
-		s[1] = s1;
+		Student s1 = new Student("홍길동", 100, 100, 100);
+		// score[0] = s1;
 
+		score[numOfStudent] = s1;
+		numOfStudent++; // 추가된 학생의 수를 +1 증가
+
+		Student s2 = new Student("이강인", 90, 80, 70);
+		score[numOfStudent] = s2;
+		numOfStudent++;
+		
 		// ③배열에 저장된 Student 타입의 인스턴스의 메소드를 이용해서 모든 데이터를 출력해봅시다.
-		System.out.println("이름: " + s[1].name);
-		System.out.println("국어 점수: " + s[1].korean);
-		System.out.println("영어 점수: " + s[1].english);
-		System.out.println("수학 점수: " + s[1].math);
+		for (int i = 0; i < numOfStudent; i++) {
+//			System.out.println(score[i].getKorean() + "\t" + score[i].getEnglish() + "\t" + score[i].getMath() + "\t"
+//					+ score[i].sum() + "\t" + score[i].average() + "\t");
 
-		System.out.println("총점: " + s[1].sum(s[1]));
-		System.out.println("평균: " + s[1].average(s[1]));
+			System.out.println(score[i].toString());
+		}
+
+//		score[5].average(); //오류!!!
+
+		// 데이터 입력 -> 배열에 저장
+		// 데이터 검색 -> 배열의 요소(객체)에서 검색
+		// 데이터 삭제 -> 배열의 요소를 삭제
 
 	}
 
