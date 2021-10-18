@@ -34,10 +34,11 @@ public class BaseEnSpeaker extends Speaker {
 
 		// 다형성
 		// 상위 타입의 참조변수 = 하위 타입의 인스턴스
+		// 참조변수의 타입에 정의된 멤버만 사용이 가능
 		Speaker sp = new BaseEnSpeaker();
 		sp.showCurrentState();
 //		sp.setBaseRate(100); // 오류발생!!
-
+		
 	}
 
 }
