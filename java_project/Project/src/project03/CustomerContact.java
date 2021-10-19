@@ -56,7 +56,7 @@ public class CustomerContact extends Contact {
 	@Override
 	public String toString() {
 
-		return super.toString() + "\n" + "회사: " + customerName + "\n" + "품목: " + item + "\n" + "직급: " + customerPosition
+		return super.toString() + "회사: " + customerName + "\n" + "품목: " + item + "\n" + "직급: " + customerPosition
 				+ "\n";
 	}
 

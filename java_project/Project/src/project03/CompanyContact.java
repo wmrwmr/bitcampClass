@@ -56,7 +56,7 @@ public class CompanyContact extends Contact {
 
 	@Override
 	public String toString() {
-		return super.toString() + "\n" + "회사: " + companyName + "\n" + "부서: " + department + "\n" + "직급: " + position
+		return super.toString() + "회사: " + companyName + "\n" + "부서: " + department + "\n" + "직급: " + position
 				+ "\n";
 
 	}
