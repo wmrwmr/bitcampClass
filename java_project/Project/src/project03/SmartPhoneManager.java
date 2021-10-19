@@ -181,7 +181,7 @@ public class SmartPhoneManager {
 			System.out.println("새로운 직급>>");
 			((CustomerContact) contact[index]).setCustomerPosition(sc.nextLine());
 
-			System.out.println("회사 연락처 데이터가 수정 되었습니다.");
+			System.out.println("거래처 연락처 데이터가 수정 되었습니다.");
 		} else {
 			System.out.println("검색하신 이름의 데이터가 존재하지 않습니다.");
 		}
