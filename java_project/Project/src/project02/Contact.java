@@ -73,7 +73,7 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "전화번호: " + phoneNumber + "\n" + "이메일: " + email + "\n" + "주소: " + address + "\n" + "생일: " + birthDay
+		return "전화: " + phoneNumber + "\n" + "메일: " + email + "\n" + "주소: " + address + "\n" + "생일: " + birthDay
 				+ "\n" + "그룹: " + group + "\n";
 	}
 

@@ -1,11 +1,9 @@
-package project03;
+package project04;
 
 import java.util.Scanner;
 
-import project03.Contact;
+import project04.Contact;
 
-//3. SmartPhone 클래스의 배열을 다형성의 특징을 이용해서 상위 타입의 배열을 생성해서 하위 클래스의 인스턴스를 저장하는 형태로 프로그
-//램은 작성해봅시다.
 public class SmartPhoneManager {
 	public static Scanner sc = new Scanner(System.in);
 	private Contact[] contact;
