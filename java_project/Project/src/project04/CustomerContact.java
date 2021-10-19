@@ -45,7 +45,12 @@ public class CustomerContact extends Contact {
 
 	@Override
 	public void showData() {
-		super.showData();
+		System.out.println("이름: " + super.getName());
+		System.out.println("전화: " + super.getPhoneNumber());
+		System.out.println("메일: " + super.getEmail());
+		System.out.println("주소: " + super.getAddress());
+		System.out.println("생일: " + super.getBirthDay());
+		System.out.println("그룹: " + super.getGroup());
 		System.out.println("회사: " + this.customerName);
 		System.out.println("품목: " + this.item);
 		System.out.println("직급: " + this.customerPosition);

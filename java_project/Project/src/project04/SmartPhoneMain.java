@@ -2,9 +2,9 @@ package project04;
 
 import java.util.Scanner;
 
-import project03.SmartPhoneManager;
+import project04.SmartPhoneManager;
 
-public class SmartPhoneMain2 {
+public class SmartPhoneMain {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
