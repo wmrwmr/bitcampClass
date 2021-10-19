@@ -18,6 +18,10 @@ public class Calculator01 implements Calculator {
 		this.n2 = n2;
 	}
 	
+	public Calculator01() {
+		
+	}
+	
 
 	@Override
 	public long add(long n1, long n2) {
@@ -47,7 +51,7 @@ public class Calculator01 implements Calculator {
 
 
 	public static void main(String[] args) {
-		Calculator c1 = new Calculator01(10, 5);
+		Calculator c1 = new Calculator01();
 		
 		System.out.println(c1.add(10, 5));
 		System.out.println(c1.substract(10, 5));
