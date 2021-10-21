@@ -17,7 +17,7 @@ public class TreeSetTest {
 		set.add(new FootballPlayer("KAYNE", 11, "TOT", 33));
 		
 		set.add(new FootballPlayer("Mbappe", 6, "PSG", 35));
-		set.add(new FootballPlayer("NAYMR", 9, "PSG", 32));
+		set.add(new FootballPlayer("NEYMAR", 9, "PSG", 32));
 		set.add(new FootballPlayer("Mbappe", 10, "PSG", 28));
 
 		Iterator<FootballPlayer> itr = set.iterator();
