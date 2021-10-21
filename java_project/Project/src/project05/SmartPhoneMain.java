@@ -1,13 +1,9 @@
 package project05;
 
-//2. 입력 또는 수정할 때 공백 문자열을 입력 받으면 다시 입력 받도록 흐름을 만들어봅시다.
-//
-//3. 입력할 때 전화번호가 같은 데이터가 입력되면 입력이 되지 않도록 흐름을 만들어봅시다.
-
 import java.util.Scanner;
 
 
-public class SmartPhoneMain extends VacuumException {
+public class SmartPhoneMain{
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
