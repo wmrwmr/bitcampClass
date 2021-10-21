@@ -1,15 +1,18 @@
 package chapter11;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 //import java.util.List;
 
-public class ArrayListTest {
+public class LinkedListTest {
 	public static void main(String[] args) {
-		ArrayList<Integer> list = null;
+//		ArrayList<Integer> list = null;
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		
 //		list = new ArrayList<Integer>(); 생략가능
-		list = new ArrayList<>();
-
+//		list = new ArrayList<>();
+		
 //		List<Integer> list2 = new ArrayList<Integer>();
 
 		// 데이터(인스턴스) 저장: add(E e)
