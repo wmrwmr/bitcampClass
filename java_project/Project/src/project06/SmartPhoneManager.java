@@ -229,10 +229,10 @@ public class SmartPhoneManager {
 			}
 		} catch (PhoneNumberException p) {
 			System.out.println(p.getMessage());
-			updateCompanyContact();
+			updateCustomerContact();
 		} catch (VacuumException v) {
 			System.out.println(v.getMessage());
-			updateCompanyContact();
+			updateCustomerContact();
 		}
 
 	}

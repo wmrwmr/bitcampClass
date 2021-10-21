@@ -184,33 +184,39 @@ public class SmartPhoneManager {
 
 	public void updateCustomerContact() {
 
-		System.out.println("수정하고자 하는 연락처의 이름을 입력해주세요");
-		String name = sc.nextLine();
+		try {
 
-		int index = searchIndex(name);
+			System.out.println("수정하고자 하는 연락처의 이름을 입력해주세요");
+			String name = sc.nextLine();
 
-		if (index > -1) {
-			System.out.println(name + "의 연락처 데이터를 수정합니다.");
-			System.out.println("새로운 전화번호>>");
-			contact[index].setPhoneNumber(sc.nextLine());
-			System.out.println("새로운 이메일>>");
-			contact[index].setEmail(sc.nextLine());
-			System.out.println("새로운 주소>>");
-			contact[index].setAddress(sc.nextLine());
-			System.out.println("새로운 생일>>");
-			contact[index].setBirthDay(sc.nextLine());
-			System.out.println("새로운 그룹>>");
-			contact[index].setGroup(sc.nextLine());
-			System.out.println("새로운 회사>>");
-			((CustomerContact) contact[index]).setCustomerName(sc.nextLine());
-			System.out.println("새로운 품목>>");
-			((CustomerContact) contact[index]).setItem(sc.nextLine());
-			System.out.println("새로운 직급>>");
-			((CustomerContact) contact[index]).setCustomerPosition(sc.nextLine());
+			int index = searchIndex(name);
 
-			System.out.println("거래처 연락처 데이터가 수정 되었습니다.");
-		} else {
-			System.out.println("검색하신 이름의 데이터가 존재하지 않습니다.");
+			if (index > -1) {
+				System.out.println(name + "의 연락처 데이터를 수정합니다.");
+				System.out.println("새로운 전화번호>>");
+				contact[index].setPhoneNumber(readSelect());
+				System.out.println("새로운 이메일>>");
+				contact[index].setEmail(readSelect());
+				System.out.println("새로운 주소>>");
+				contact[index].setAddress(readSelect());
+				System.out.println("새로운 생일>>");
+				contact[index].setBirthDay(readSelect());
+				System.out.println("새로운 그룹>>");
+				contact[index].setGroup(readSelect());
+				System.out.println("새로운 회사>>");
+				((CustomerContact) contact[index]).setCustomerName(readSelect());
+				System.out.println("새로운 품목>>");
+				((CustomerContact) contact[index]).setItem(readSelect());
+				System.out.println("새로운 직급>>");
+				((CustomerContact) contact[index]).setCustomerPosition(readSelect());
+
+				System.out.println("거래처 연락처 데이터가 수정 되었습니다.");
+			} else {
+				System.out.println("검색하신 이름의 데이터가 존재하지 않습니다.");
+			}
+		} catch (VacuumException v) {
+			System.out.println(v.getMessage());
+			updateCustomerContact();
 		}
 
 	}
