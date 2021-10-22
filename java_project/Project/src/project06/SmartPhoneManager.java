@@ -89,8 +89,8 @@ public class SmartPhoneManager {
 	}
 
 	public void showAllData() {
-		System.out.println("연락처 정보를 모두 출력합니다.");
-		System.out.println("=====================");
+		System.out.println("연락처 정보를 모두 출력합니다. (" + numOfContact + " 명)");
+		System.out.println("=============================");
 
 		for (int i = 0; i < numOfContact; i++) {
 			contact[i].showData();
@@ -128,14 +128,14 @@ public class SmartPhoneManager {
 
 	private int searchIndex(String name) {
 		int index = -1;
-
+		
 		for (int i = 0; i < numOfContact; i++) {
 			if (contact[i].getName().equals(name)) {
 				index = i;
 				break;
 			}
 		}
-
+		
 		return index;
 	}
 
