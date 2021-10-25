@@ -128,14 +128,14 @@ public class SmartPhoneManager {
 
 	private int searchIndex(String name) {
 		int index = -1;
-		
+
 		for (int i = 0; i < numOfContact; i++) {
 			if (contact[i].getName().equals(name)) {
 				index = i;
 				break;
 			}
 		}
-		
+
 		return index;
 	}
 
@@ -256,7 +256,7 @@ public class SmartPhoneManager {
 
 	}
 
-	public static String readSelect() throws VacuumException {
+	public String readSelect() throws VacuumException {
 		Scanner sc = new Scanner(System.in);
 		String select = sc.nextLine();
 		if (!(select.matches("^\\S*$"))) {
@@ -280,7 +280,7 @@ public class SmartPhoneManager {
 		return select;
 	}
 
-	public static String readName() throws NameException {
+	public String readName() throws NameException {
 		Scanner sc = new Scanner(System.in);
 		String select = sc.nextLine();
 		if (!(select.matches("^\\S*$")) || !(select.matches("^[a-z A-Z 가-힣]*$"))) {
