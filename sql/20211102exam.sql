@@ -21,7 +21,7 @@ where sal = (select min(sal) from emp)
 ​
 
 
--- 46. 평균급여가 가장 적은 직급의 직급 이름과 직급의 평균을 구하시오.22
+-- 46. 평균급여가 가장 적은 직급의 직급 이름과 직급의 평균을 구하시오.
 
 select job, avg(sal)
 from emp
@@ -51,8 +51,8 @@ where sal < any (select sal from emp where job = 'ANALYST')
 -- 49. 부하직원이 없는 사원의 이름을 표시하시오. 
 
 
-select e.ename
-from emp e
+select ename
+from emp
 where empno not in (select distinct mgr from emp where mgr is not null)
 ;
 
