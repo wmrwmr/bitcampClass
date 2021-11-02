@@ -129,9 +129,9 @@ where deptno = (select deptno
 
 -- 55. KING에게 보고하는 사원의 이름과 급여를 표시하시오.
 
-select ename, sal
+select ename, sal, MGR
 from emp
-where mgr = 7839
+where mgr = (select empno from emp where ename = 'KING')
 ;
 ​
 
