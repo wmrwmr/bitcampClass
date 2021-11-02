@@ -204,7 +204,7 @@ having avg(sal) = (select min(avg(sal))
 
 select ename
 from emp
-where deptno in (select deptno
+where deptno in (select distinct deptno
                 from emp
                 where job = 'MANAGER')
 ;
