@@ -51,7 +51,14 @@ set fr_u_major = '화학', fr_u_year = 2
 where idx = 1
 ;
 
+select * 
+from phoneInfo_basic b, phoneInfo_univ u
+where b.idx=u.fr_ref
+;
+
 delete from phoneInfo_univ;
+
+
 
 -----------------------------
 select * from phoneInfo_com;
@@ -68,10 +75,18 @@ update phoneInfo_com
 set fr_c_company = '오성전자'
 ;
 
+select * 
+from phoneInfo_basic b, phoneInfo_com c
+where b.idx=c.fr_ref
+;
+
+
 delete 
 from phoneInfo_com
 where idx = 2
 ;
+
+
 
 
 
