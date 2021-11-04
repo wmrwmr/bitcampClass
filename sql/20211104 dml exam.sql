@@ -102,9 +102,10 @@ set fr_c_company = '오성전자'
 ;
 
 -- equi join
-select * 
+select b.fr_name, b.fr_phonenumber, b.fr_email,
+nvl (c.fr_c_company, '입력 데이터 없음') company
 from phoneInfo_basic b, phoneInfo_com c
-where b.idx=c.fr_ref
+where b.idx=c.fr_ref(+)
 ;
 
 -- 2번 삭제
