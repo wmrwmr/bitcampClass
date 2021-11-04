@@ -4,6 +4,7 @@
 ------------------------------
 select * from phoneInfo_basic;
 
+
 -- 삽입
 insert into phoneInfo_basic
 values (1, '홍길동', '010-1111-1111', '홍길동@gmail.com', '서울', sysdate)
@@ -115,6 +116,13 @@ where idx = 2
 ;
 
 
+------------------------------
+-- 전체 데이터 리스트 출력: 테이블 세개 join
+select b.fr_name, b.fr_phonenumber, u.fr_u_major, nvl(c.fr_c_company, '입력 데이터 없음'), nvl(u.fr_u_major, '입력 데이터 없음')
+from phoneinfo_basic b, phoneinfo_univ u, phoneinfo_com c
+where b.idx=u.fr_ref(+) and b.idx=c.fr_ref(+)
+order by b.idx
+;
 
 
 
