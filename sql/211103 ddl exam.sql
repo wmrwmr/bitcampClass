@@ -26,6 +26,42 @@ create table phoneInfo_com (
     constraint phoneInfo_com_fr_ref_fk foreign key (fr_ref) references phoneInfo_basic (idx)
 );
 
+-- phoneinfo_basic 테이블 pk -> idx에 입력할 일련번호
+-- 시퀀스 생성
+create sequence pib_idx_seq
+start with 1
+minvalue 1
+increment by 1
+maxvalue 99999
+;
+
+
+create sequence piu_idx_seq
+start with 1
+minvalue 1
+increment by 1
+maxvalue 99999
+;
+
+
+create sequence pic_idx_seq
+start with 1
+minvalue 1
+increment by 1
+maxvalue 99999
+;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
