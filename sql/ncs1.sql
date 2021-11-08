@@ -10,7 +10,7 @@
 -- 회사이름, 부서이름, 직급
 -- 모임이름, 닉네임
 
-/* 
+
 create table Contact_basic (
     pIdx number(6) constraint Contact_pIdx_pk primary key,
     cname varchar2(20) not null,
@@ -47,7 +47,7 @@ create table Contact_cafe (
     constraint Contact_cafe_pIdx_pk primary key (pIdx),
     constraint Contact_cafe_ref_fk foreign key (ref) references Contact_basic (pIdx)
 );
-*/
+
 
 
 
@@ -55,16 +55,10 @@ create table Contact_cafe (
 
 --2. DEPT 테이블에 데이터를 삽입하는 SQL을 작성하시오. 입력 데이터는 임의로 작성하시오.
 
-drop table dept;
-drop table emp;
-
 
  insert into dept
  values (50, 'SALES', 'SEOUL')
  ;
- 
- select * from dept;
-
 
 --3. DEPT 테이블에 위에서 삽입한 데이터의 dname, loc 데이터를 변경하는 SQL을 작성하시오.
 --입력 데이터는 임의로 작성하시오.
@@ -106,4 +100,20 @@ from emp, dept
 ;
 
 --3. EMP 테이블에서 모든 사원의 부서번호를 이름이 'SCOTT'인 사원의 부서번호로 변경하는 SQL을 작성하시오.
+update emp
+set deptno = (
+                select deptno
+                from emp 
+                where ename = 'SCOTT'
+                )
+;
+
+
+
+
+
+
+
+
+
 
