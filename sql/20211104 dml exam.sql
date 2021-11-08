@@ -146,6 +146,20 @@ where b.idx=u.fr_ref(+) and b.idx=c.fr_ref(+)
 order by b.idx
 ;
 
+--view 생성
+CREATE VIEW phoneInfo AS
+select b.fr_name, b.fr_phonenumber, u.fr_u_major, nvl(c.fr_c_company, '입력 데이터 없음'), nvl(u.fr_u_major, '입력 데이터 없음')
+from phoneinfo_basic b, phoneinfo_univ u, phoneinfo_com c
+where b.idx=u.fr_ref(+) and b.idx=c.fr_ref(+)
+order by b.idx 
+;
+
+
+
+
+
+
+
 
 
 
