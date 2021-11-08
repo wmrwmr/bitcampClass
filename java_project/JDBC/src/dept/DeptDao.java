@@ -11,6 +11,27 @@ import java.util.List;
 // Data Access Object: Sql 처리만하는 클래스
 public class DeptDao {
 
+	// 변수가 없는 클래스, 기능만 있는 클래스
+	// 인스턴스를 하나만 만들어써도 된다!!!
+	// 인스턴스를 여러개 만들어 쓰게 하지 말자!!!
+	
+
+	
+	// 인스턴스 하나만 만들어 사용하도록 하는 패턴
+	// 외부에서 인스턴스를 생성하지 못하도록 처리! -> 생성자의 접근제어자를 private
+	private DeptDao() {
+	}
+
+	// 클래스 내부에서 인스턴스를 생성!!!, 이 인스턴스를 직접 접근 안되도록!
+	private static DeptDao dao = new DeptDao();
+
+	// 내부에서 만들어진 인스턴스를 특정 메소드를 이용해서 받을 수 있도록 해주자!!! (싱글톤 패턴)
+	static public DeptDao getInstance() {
+		return dao;
+	}
+
+
+
 	// 전체 리스트를 구하는 메소드: select -> Connection을 전달받고, List<Dept>
 	public List<Dept> selectAllList(Connection conn) {
 
@@ -33,7 +54,7 @@ public class DeptDao {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs);
-			JdbcUtil.close(stmt);			
+			JdbcUtil.close(stmt);
 		}
 
 		return result;
@@ -67,7 +88,7 @@ public class DeptDao {
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);			
+			JdbcUtil.close(pstmt);
 		}
 
 		return dept;
@@ -96,7 +117,7 @@ public class DeptDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(pstmt);			
+			JdbcUtil.close(pstmt);
 		}
 
 		return resultCnt;
@@ -125,7 +146,7 @@ public class DeptDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(pstmt);			
+			JdbcUtil.close(pstmt);
 		}
 
 		return resultCnt;
@@ -133,28 +154,26 @@ public class DeptDao {
 
 	// 부서 정보를 삭제하는 메소드: delete -> Connection을 전달받고, 부서번호(PK)를 전달받아서 삭제
 	public int deleteDept(Connection conn, int deptno) {
-		
+
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
-		
+
 		// Sql: delete
 		String sql = "delete from dept where deptno=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, deptno);
-			
+
 			resultCnt = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(pstmt);			
+			JdbcUtil.close(pstmt);
 		}
 		return resultCnt;
 	}
-	
-	
-	
+
 }
