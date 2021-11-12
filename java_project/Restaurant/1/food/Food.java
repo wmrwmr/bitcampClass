@@ -5,17 +5,14 @@ public class Food {
 	private int fid;
 	private String fname;
 	private int fprice;
-	
 	public Food(int fid, String fname, int fprice) {
 		super();
 		this.fid = fid;
 		this.fname = fname;
 		this.fprice = fprice;
 	}
-	
 	//기본생성자
 	public Food() {}
-	
 	//getter/setter
 	public int getFid() {
 		return fid;
@@ -34,6 +31,10 @@ public class Food {
 	}
 	public void setFprice(int fprice) {
 		this.fprice = fprice;
+	}
+	@Override
+	public String toString() {
+		return "메뉴명: " + fname + "가격: " + fprice ;
 	}
 	
 }

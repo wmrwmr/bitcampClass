@@ -46,18 +46,18 @@ public class DeptMain {
 
 			System.out.println("------------------------");
 
-//			// 부서 정보 입력
-//			Dept newDept = new Dept(60, "DEV", "SEOUL");
-//
-//			int insertCnt = deptDao.insertDept(conn, newDept);
-//			if (insertCnt > 0) {
-//				System.out.println("부서 정보가 입력되었습니다.");
-//
-//			} else {
-//				System.out.println("입력 실패");
-//			}
+			// 부서 정보 입력
+			Dept newDept = new Dept(60, "DEV", "SEOUL");
 
-//			System.out.println("입력 결과: " + deptDao.selectByDeptno(conn, 50));
+			int insertCnt = deptDao.insertDept(conn, newDept);
+			if (insertCnt > 0) {
+				System.out.println("부서 정보가 입력되었습니다.");
+
+			} else {
+				System.out.println("입력 실패");
+			}
+
+			System.out.println("입력 결과: " + deptDao.selectByDeptno(conn, 50));
 
 			System.out.println("------------------------");
 

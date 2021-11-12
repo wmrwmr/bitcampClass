@@ -8,7 +8,7 @@ create sequence food_id_seq
 start with 1
 increment by 1
 minvalue 1
-maxvalue 999999;
+maxvalue 99;
     
 insert into Food
 values(food_id_seq.nextval, '그린 샐러드', 12000);
@@ -35,25 +35,11 @@ select * from food;
 
 --------------------------------------------------------------------
 
-create table tables (
-    tid number(1) constraint tables_id_pk primary key,
-    constraint tables_tid_ck check (tid between 1 and 10)
-);
-
-insert into tables values (1);
-insert into tables values (2);
-insert into tables values (3);
-insert into tables values (4);
-insert into tables values (5);
-
-select * from tables;
-
---------------------------------------------------------------------
-
 create table orders (
     oid number(6) constraint orders_id_pk primary key,
-    tid number(1) not null constraint orders_tid_ck references tables(tid),
-    fid number(2) not null constraint orders_fid_ck references food(fid)
+    tid number(2) not null constraint orders_tid_ck check (tid between 1 and 5),
+    fid number(2) not null constraint orders_fid_ck references food(fid),
+    ordertime timeStamp default sysdate not null
     );
     
 create sequence orders_id_seq
@@ -68,11 +54,11 @@ select * from orders;
 
 create table reservation (
     rid number (6) constraint reservation_id_pk primary key,
-    rdate varchar2 (40) not null,
+    rdate timeStamp not null,
     rname varchar2(20) not null,
     rphone varchar2(20) not null unique,
     rnum number (1) not null,
-    tid number(6) unique constraint reservation_tid_fk references tables(tid)
+    tid number(2) not null constraint reservation_tid_ck check (tid between 1 and 5)
    );
    
 create sequence reservation_id_seq
@@ -109,3 +95,18 @@ insert into members (mid, mname, mphone) values (members_id_seq.nextval, '윈터
 insert into members (mid, mname, mphone) values (members_id_seq.nextval, '지젤', '010-7711-3452');
 insert into members (mid, mname, mphone) values (members_id_seq.nextval, '닝닝', '010-8796-0754');
 
+select * from members;
+
+--------------------------------------------------------------------
+
+commit;
+
+drop table food;
+drop table orders;
+drop table reservation;
+drop table members;
+
+drop sequence food_id_seq;
+drop sequence orders_id_seq;
+drop sequence reservation_id_seq;
+drop sequence members_id_seq;

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import jdbc.JdbcUtil;
 
 public class MembersDao {
 
@@ -20,7 +21,7 @@ public class MembersDao {
 		return dao;
 	}
 
-	public List<Members> selectAll(Connection conn) {
+	public List<Members> selectAllMembers(Connection conn) {
 		Statement st = null;
 		ResultSet set = null;
 		List<Members> list = new ArrayList<Members>();
@@ -34,20 +35,20 @@ public class MembersDao {
 				list.add(new Members(set.getInt(1), set.getString(2), set.getString(3), set.getInt(4),
 						set.getString(5)));
 			}
-			
+
 		} catch (SQLException e) {
-			System.out.println("(목록을 불러오는데 실패했습니다.)");
-			e.printStackTrace();
+			System.out.println("<fail>");
 		} finally {
-			// JdbcUtil.close 메소드
+			JdbcUtil.close(set);
+			JdbcUtil.close(st);
 		}
 		return list;
 	}
 
-	public Members searchByName(Connection conn, String mname) {
+	public List<Members> selectByName(Connection conn, String mname) {
 		PreparedStatement pst = null;
 		ResultSet set = null;
-		Members mem = null;
+		List<Members> list = new ArrayList<Members>();
 
 		String sql = "select * from members where mname like ?";
 
@@ -57,44 +58,48 @@ public class MembersDao {
 
 			set = pst.executeQuery();
 
-			if (set.next()) {
-				mem = new Members(set.getInt(1), set.getString(2), set.getString(3), set.getInt(4), set.getString(5));
+			while (set.next()) {
+				list.add(new Members(set.getInt(1), set.getString(2), set.getString(3), set.getInt(4),
+						set.getString(5)));
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("<fail>");
 		} finally {
-			// JdbcUtil.close 메소드
+			JdbcUtil.close(set);
+			JdbcUtil.close(pst);
 		}
-		return mem;
+		return list;
 	}
 
-	public Members searchByPhone(Connection conn, String lastNum) {
+	public List<Members> selectByPhone(Connection conn, String lastPN) {
 		PreparedStatement pst = null;
 		ResultSet set = null;
-		Members mem = null;
+		List<Members> list = new ArrayList<Members>();
 
-		String sql = "select * from members where mphone like %?";
+		String sql = "select * from members where mphone like '%'||?";
 
 		try {
 			pst = conn.prepareStatement(sql);
-			pst.setString(1, lastNum);
+			pst.setString(1, lastPN);
 
 			set = pst.executeQuery();
 
-			if (set.next()) {
-				mem = new Members(set.getInt(1), set.getString(2), set.getString(3), set.getInt(4), set.getString(5));
+			while (set.next()) {
+				list.add(new Members(set.getInt(1), set.getString(2), set.getString(3), set.getInt(4),
+						set.getString(5)));
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("<fail>");
 		} finally {
-			// JdbcUtil.close 메소드
+			JdbcUtil.close(set);
+			JdbcUtil.close(pst);
 		}
-		return mem;
+		return list;
 	}
 
-	public int insert(Connection conn, Members mem) {
+	public int insertMember(Connection conn, Members mem) {
 		PreparedStatement pst = null;
 		int result = 0;
 
@@ -105,18 +110,18 @@ public class MembersDao {
 
 			pst.setString(1, mem.getMname());
 			pst.setString(2, mem.getMphone());
-			
+
 			result = pst.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("<중복된 연락처 또는 잘못된 입력으로 등록에 실패하였습니다.>");
 		} finally {
-			// JdbcUtil.close 메소드
+			JdbcUtil.close(pst);
 		}
 		return result;
 	}
 
-	public int update(Connection conn, int mid, String newName, String newPhone) {
+	public int updateMember(Connection conn, int mid, String newName, String newPhone) {
 		PreparedStatement pst = null;
 		int result = 0;
 
@@ -129,15 +134,17 @@ public class MembersDao {
 			pst.setString(2, newPhone);
 			pst.setInt(3, mid);
 
+			result = pst.executeUpdate();
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("<중복된 연락처 또는 잘못된 입력으로 수정에 실패하였습니다.>");
 		} finally {
-			// JdbcUtil.close 메소드
+			JdbcUtil.close(pst);
 		}
 		return result;
 	}
 
-	public int delete(Connection conn, int mid) {
+	public int deleteMember(Connection conn, int mid) {
 		PreparedStatement pst = null;
 		int result = 0;
 
@@ -145,11 +152,14 @@ public class MembersDao {
 
 		try {
 			pst = conn.prepareStatement(sql);
+			pst.setInt(1, mid);
+
+			result = pst.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("<fail>");
 		} finally {
-			// JdbcUtil.close 메소드
+			JdbcUtil.close(pst);
 		}
 		return result;
 	}
