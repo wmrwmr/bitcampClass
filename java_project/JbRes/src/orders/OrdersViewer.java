@@ -1,34 +1,29 @@
 package orders;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
 import controller.BadInputController;
 import controller.Menu;
-
+import food.FoodViewer;
 import jdbc.ConnectionProvider;
-import jdbc.JdbcUtil;
-import orders.FoodOrders;
-import orders.Orders;
-import orders.OrdersDao;
 
 public class OrdersViewer {
-	
-	   // 클래스 내부에서 인스턴스를 생성!!!, 이 인스턴스를 직접 접근 안되도록!
-	   private static Orders dao = new Orders();
+	private BadInputController inputC;
+	public int total = 0;
 
-	   // 내부에서 만들어진 인스턴스를 특정 메소드를 이용해서 받을 수 있도록 해주자!!! (싱글톤 패턴)
-	   static public Orders getInstance() {
-	      return dao;
-	   }
-	   
-	   
+	// 클래스 내부에서 인스턴스를 생성!!!, 이 인스턴스를 직접 접근 안되도록!
+	private static Orders dao = new Orders();
+
+	// 내부에서 만들어진 인스턴스를 특정 메소드를 이용해서 받을 수 있도록 해주자!!! (싱글톤 패턴)
+	static public Orders getInstance() {
+		return dao;
+	}
 
 	OrdersDao ordersDao = OrdersDao.getInstance();
 	Orders orders = Orders.getInstance();
@@ -38,26 +33,118 @@ public class OrdersViewer {
 	List<FoodOrders> list = new ArrayList<>();
 	Scanner scanner;
 	Connection conn = null;
-	
-	public OrdersViewer(Scanner scanner) {
+	FoodViewer fdV;
+
+	public OrdersViewer(Scanner scanner, BadInputController inputC, FoodViewer fdV) {
 		this.scanner = scanner;
+		this.inputC = inputC;
+		this.fdV = fdV;
 	}
 
-	public void payment() {
+	public void orderManager() {
+		try {
+			conn = ConnectionProvider.getConnection();
+			conn.setAutoCommit(false);
 
-		while (true) {
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.print(Menu.O_INSERT + ". 주문 추가   ");
+			// System.out.print(Menu.O_DELETE + ". 주문 삭제 ");
+			System.out.print(Menu.O_EXIT + ". 뒤로 가기\n");
+			System.out.println("-------------------------------------------------------------------");
+			int userChoice = inputC.checkInt("> ", Menu.O_INSERT, Menu.O_EXIT);
+			if (userChoice == Menu.O_INSERT) {
+				insert();
+				conn.commit();
+			} /*
+				 * else if (userChoice == Menu.O_DELETE) { delete(); }
+				 */ else {
+			}
+		} catch (SQLException e) {
+			System.out.print("");
+		}
+	}
 
-			try {
+	private void insert() {
+		try {
+			tablePrinter();
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("몇 번 테이블에 주문하시겠습니까?");
+			System.out.println("-------------------------------------------------------------------");
+			String tid = inputC.checkInt("> ");
+			int tid1 = Integer.parseInt(tid);
 
-				conn = ConnectionProvider.getConnection();
+			fdV.showAll();
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("추가하길 원하는 메뉴의 번호를 입력해 주십시오.");
+			System.out.println("-------------------------------------------------------------------");
+			String fid = inputC.checkInt("> ");
+			int fid1 = Integer.parseInt(fid);
 
+			Orders orders = new Orders(tid1, fid1);
+
+			int result = ordersDao.addOrder(conn, orders);
+			if (result == 1) {
+				conn.commit();
+				System.out.println("<주문이 완료되었습니다.>");
+			}
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("[확인] 계속 진행하려면 엔터를 눌러주세요.");
+			scanner.nextLine();
+
+		} catch (SQLException e) {
+			System.out.print("");
+		}
+	}
+
+	private void delete() {
+		try {
+			tablePrinter();
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("몇 번 테이블의 주문을 제거할까요?");
+			System.out.println("-------------------------------------------------------------------");
+			String tid = inputC.checkInt("> ");
+			int tid1 = Integer.parseInt(tid);
+
+			list = ordersDao.selectAllFoodList(conn, tid1);
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("몇 번째 주문을 제거할까요?");
+			System.out.println("-------------------------------------------------------------------");
+			String oid1 = inputC.checkInt("> ");
+			int oid2 = Integer.parseInt(oid1);
+
+			int result = ordersDao.deleteOrders(conn, oid2);
+
+			if (result == 1) {
+				conn.commit();
+				System.out.println("<주문 정보가 삭제되었습니다.>");
+			}
+
+		} catch (SQLException e) {
+			System.out.println("<fail>");
+		}
+
+	}
+
+	public int payment() {
+		try {
+			conn = ConnectionProvider.getConnection();
+
+			while (true) {
 				Scanner sc = new Scanner(System.in);
+				System.out.println();
+				System.out.println("-------------------------------------------------------------------");
 				System.out.println("결제할 테이블 번호를 입력하거나 뒤로 가려면 [0]을 입력해주세요");
+				System.out.println("-------------------------------------------------------------------");
+				System.out.print("> ");
 
 				int select = Integer.parseInt(sc.nextLine());
 
 				if (select == 0) {
-
 					break;
 
 				} else {
@@ -67,161 +154,287 @@ public class OrdersViewer {
 
 					if (emptyCheck == 1) {
 						// 결제 계속 진행
-						int total = ordersDao.selectTotalPrice(conn, select);
+						total = ordersDao.selectTotalPrice(conn, select);
+						list = ordersDao.selectAllFoodList(conn, select);
 
-						System.out.println("총 결제 가격은" + total + "원 입니다.");
+						System.out.println();
+						System.out.println("<" + select + "번 테이블 주문내역>");
+						System.out.println();
+						for (FoodOrders food : list) {
+							System.out.println(food.getFname() + " " + food.getFprice());
+						}
+						System.out.println("주문 합계 " + total);
+						System.out.println();
+						System.out.println("결제 하시겠습니까?");
+						System.out.println("-------------------------------------------------------------------");
+						System.out.println("1. 네   2. 아니오");
+						System.out.println("-------------------------------------------------------------------");
+						int answer = inputC.checkInt("> ", 1, 2);
 
-						// 회원여부 체크 후 마일리지 적립 과정 여기에
+						if (answer == 1) {
+							Date now = new Date();
+							SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
-						// 결제 완료후 테이블 번호로 주문 정보 삭제하는 메소드
-						ordersDao.deleteOrders(conn, select);
-						break;
+							// -----------------------------------------------------------------------------------------
+							System.out.println();
+							System.out.println();
+							System.out.println("─────────────────────────────────");
+							System.out.println();
+							System.out.println("              [영수증]");
+							System.out.println();
+							System.out.println();
+							System.out.println("[매장명] 자비레스");
+							System.out.println("[사업자] 285-37-00231");
+							System.out.println("[주소] 서울시 강남구 역삼동 819-3 삼오빌딩 ");
+							System.out.println("[TEL] 0507-1414-9601");
+							System.out.println("" + sdf.format(now));
+							System.out.println("---------------------------------");
+							System.out.println("상품명\t\t\t금액");
+							System.out.println("---------------------------------");
+							for (FoodOrders food : list) {
+								String fprice = String.valueOf(food.getFprice());
+								String fprice1 = fprice.substring(0, fprice.length() - 3);
+								String fprice2 = fprice.substring(fprice.length() - 3, fprice.length());
+								String fname = food.getFname();
+								if (fname.length() < 7) {
+									fname += "   ";
+								} else if (fname.length() > 9) {
+									fname = fname.substring(0, 9);
+									fname += "...";
+								}
+								System.out.println(food.getFname() + "\t\t" + fprice1 + "," + fprice2 + "원");
+							}
+							System.out.println("---------------------------------");
+							String totalS = String.valueOf(total);
+							String total1 = totalS.substring(0, totalS.length() - 3);
+							String total2 = totalS.substring(totalS.length() - 3, totalS.length());
+							System.out.println("합계 금액      \t\t" + total1 + "," + total2 + "원");
+							System.out.println("---------------------------------");
+							System.out.println("              <이용해 주셔서 감사합니다.>");
+							System.out.println();
+							System.out.println();
+							System.out.println();
+							System.out.println("─────────────────────────────────");
+							System.out.println();
+							System.out.println();
+							// -----------------------------------------------------------------------------------------
+
+							System.out.println();
+							System.out.println("-------------------------------------------------------------------");
+							System.out.println("<결제가 완료되었습니다. 이용해주셔서 감사합니다.>");
+							System.out.println("-------------------------------------------------------------------");
+
+							// 결제 완료후 테이블 번호로 주문 정보 삭제하는 메소드
+							ordersDao.deleteOrders(conn, select);
+							break;
+						} else {
+							total = 0;
+						}
 
 					} else if (emptyCheck == 0) {
 						// 처음으로
 						continue;
 					}
-
 				}
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+		return total;
 	}
 
-
 	public void tablePrinter() {
-
 		try {
 			conn = ConnectionProvider.getConnection();
-			
+
+			//
+
+			// -----------------------------------------------------------------------------------------
+			String fname = null;
+			for (int i = 1; i <= 5; i++) {
+				System.out.println();
+				System.out.println("┌───────────────┐");
+				System.out.println("│[" + i + "]\t\t│");
+
+				list = ordersDao.selectAllFoodList(conn, i);
+
+				for (int j = 0; j <= 7; j++) {
+					if (j < 6) {
+						if (list.size() == 0 && j == 1) {
+							System.out.println("│(빈 테이블)\t│");
+						} else if (list.size() < j + 1) {
+							System.out.println("│\t\t│");
+						} else {
+							if (j == 5 && list.size() > 6) {
+								System.out.println("│(...)\t\t│");
+							} else {
+								fname = list.get(j).getFname();
+								if (fname.length() < 5) {
+									fname += "\t";
+								} else if (fname.length() >= 5 && fname.length() < 7) {
+									fname += "   ";
+								} else if (fname.length() > 9) {
+									fname = fname.substring(0, 9);
+									fname += "...";
+								} else {
+									fname += "\t";
+								}
+								System.out.println("│" + fname + "│");
+							}
+						}
+					} else if (j == 6) {
+						if (list.size() != 0) {
+							System.out.println("│합계 = " + ordersDao.selectTotalPrice(conn, i) + "원\t│");
+						} else {
+							System.out.println("│\t\t│");
+						}
+					} else {
+						System.out.println("└───────────────┘");
+					}
+				}
+			}
+
+			// -----------------------------------------------------------------------------------------
+
+//			for (int a = 1; a <= 5; a++) {
+//				if (ordersDao.selectTotalPrice(conn, i) == 0) {
+//					System.out.println("┌─────────┐");
+//					System.out.println("│<" + i + "번 테이블 >	│");
+//					System.out.println("│(빈 테이블)	│");
+//					System.out.println("└───────────────┘");
+//				} else {
+//					System.out.println("┌───────────────┐");
+//					System.out.println("│<" + i + "번 테이블 >	│");
+//					list = ordersDao.selectAllFoodList(conn, i);
+//
+//					for (FoodOrders food : list) {
+//						System.out.println("│" + food + " 	│");
+//					}
+//					System.out.print("│합계: ");
+//					System.out.print(ordersDao.selectTotalPrice(conn, i));
+//					System.out.print("원	│");
+//					System.out.println();
+//					System.out.println("└───────────────┘");
+//				}
+//			}
+
 			// 1번
 
-			if (ordersDao.selectTotalPrice(conn, 1) == 0) {
-				System.out.println("┌──────────┐");
-				System.out.println("<1번 테이블 >");
-				System.out.println("(빈 테이블)");
-				System.out.println("└──────────┘");
-			} else {
-				System.out.println("┌──────────┐");
-				System.out.println("<1번 테이블 >");
-				list = ordersDao.selectAllFoodList(conn, 1);
-
-				for (FoodOrders food : list) {
-					System.out.println(food);
-				}
-				
-				System.out.println();
-				System.out.print("합계: ");
-				System.out.print(ordersDao.selectTotalPrice(conn, 1));
-				System.out.print("원");
-				System.out.println();
-				System.out.println("└──────────┘");
-
-			}
-			
-			
-			// 2번
-			
-			
-			
-			if (ordersDao.selectTotalPrice(conn, 2) == 0) {
-				System.out.println("┌──────────┐");
-				System.out.println("<2번 테이블 >");
-				System.out.println("(빈 테이블)");
-				System.out.println("└──────────┘");
-			} else {
-				System.out.println("┌──────────┐");
-				System.out.println("<2번 테이블 >");
-				list = ordersDao.selectAllFoodList(conn, 2);
-
-				for (FoodOrders food : list) {
-					System.out.println(food);
-				}
-				System.out.print("합계: ");
-				System.out.print(ordersDao.selectTotalPrice(conn, 2));
-				System.out.print("원");
-				System.out.println();
-				System.out.println("└──────────┘");
-
-			}
-			
-			// 3번
-			
-			if (ordersDao.selectTotalPrice(conn, 3) == 0) {
-				System.out.println("┌──────────┐");
-				System.out.println("<3번 테이블 >");
-				System.out.println("(빈 테이블)");
-				System.out.println("└──────────┘");
-			} else {
-				System.out.println("┌──────────┐");
-				System.out.println("<3번 테이블 >");
-				list = ordersDao.selectAllFoodList(conn, 3);
-
-				for (FoodOrders food : list) {
-					System.out.println(food);
-				}
-				System.out.print("합계: ");
-				System.out.print(ordersDao.selectTotalPrice(conn, 3));
-				System.out.print("원");
-				System.out.println();
-				System.out.println("└──────────┘");
-
-			}
-			
-			// 4번
-			
-			if (ordersDao.selectTotalPrice(conn, 4) == 0) {
-				System.out.println("┌──────────┐");
-				System.out.println("<4번 테이블 >");
-				System.out.println("(빈 테이블)");
-				System.out.println("└──────────┘");
-			} else {
-				System.out.println("┌──────────┐");
-				System.out.println("<4번 테이블 >");
-				list = ordersDao.selectAllFoodList(conn, 4);
-
-				for (FoodOrders food : list) {
-					System.out.println(food);
-				}
-				System.out.print("합계: ");
-				System.out.print(ordersDao.selectTotalPrice(conn, 4));
-				System.out.print("원");
-				System.out.println();
-				System.out.println("└──────────┘");
-
-			}
-			
-			
-			// 5번
-			
-			if (ordersDao.selectTotalPrice(conn, 5) == 0) {
-				System.out.println("┌──────────┐");
-				System.out.println("<5번 테이블 >");
-				System.out.println("(빈 테이블)");
-				System.out.println("└──────────┘");
-			} else {
-				System.out.println("┌──────────┐");
-				System.out.println("<5번 테이블 >");
-				list = ordersDao.selectAllFoodList(conn, 5);
-
-				for (FoodOrders food : list) {
-					System.out.println(food);
-				}
-				System.out.print("합계: ");
-				System.out.print(ordersDao.selectTotalPrice(conn, 5));
-				System.out.print("원");
-				System.out.println();
-				System.out.println("└──────────┘");
-
-			}
-			
-			
-			
+//			if (ordersDao.selectTotalPrice(conn, 1) == 0) {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<1번 테이블 >");
+//				System.out.println("(빈 테이블)");
+//				System.out.println("└──────────┘");
+//			} else {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<1번 테이블 >");
+//				list = ordersDao.selectAllFoodList(conn, 1);
+//
+//				for (FoodOrders food : list) {
+//					System.out.println(food);
+//				}
+//
+//				System.out.println();
+//				System.out.print("합계: ");
+//				System.out.print(ordersDao.selectTotalPrice(conn, 1));
+//				System.out.print("원");
+//				System.out.println();
+//				System.out.println("└──────────┘");
+//
+//			}
+//
+//			// 2번
+//
+//			if (ordersDao.selectTotalPrice(conn, 2) == 0) {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<2번 테이블 >");
+//				System.out.println("(빈 테이블)");
+//				System.out.println("└──────────┘");
+//			} else {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<2번 테이블 >");
+//				list = ordersDao.selectAllFoodList(conn, 2);
+//
+//				for (FoodOrders food : list) {
+//					System.out.println(food);
+//				}
+//				System.out.print("합계: ");
+//				System.out.print(ordersDao.selectTotalPrice(conn, 2));
+//				System.out.print("원");
+//				System.out.println();
+//				System.out.println("└──────────┘");
+//
+//			}
+//
+//			// 3번
+//
+//			if (ordersDao.selectTotalPrice(conn, 3) == 0) {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<3번 테이블 >");
+//				System.out.println("(빈 테이블)");
+//				System.out.println("└──────────┘");
+//			} else {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<3번 테이블 >");
+//				list = ordersDao.selectAllFoodList(conn, 3);
+//
+//				for (FoodOrders food : list) {
+//					System.out.println(food);
+//				}
+//				System.out.print("합계: ");
+//				System.out.print(ordersDao.selectTotalPrice(conn, 3));
+//				System.out.print("원");
+//				System.out.println();
+//				System.out.println("└──────────┘");
+//
+//			}
+//
+//			// 4번
+//
+//			if (ordersDao.selectTotalPrice(conn, 4) == 0) {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<4번 테이블 >");
+//				System.out.println("(빈 테이블)");
+//				System.out.println("└──────────┘");
+//			} else {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<4번 테이블 >");
+//				list = ordersDao.selectAllFoodList(conn, 4);
+//
+//				for (FoodOrders food : list) {
+//					System.out.println(food);
+//				}
+//				System.out.print("합계: ");
+//				System.out.print(ordersDao.selectTotalPrice(conn, 4));
+//				System.out.print("원");
+//				System.out.println();
+//				System.out.println("└──────────┘");
+//
+//			}
+//
+//			// 5번
+//
+//			if (ordersDao.selectTotalPrice(conn, 5) == 0) {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<5번 테이블 >");
+//				System.out.println("(빈 테이블)");
+//				System.out.println("└──────────┘");
+//			} else {
+//				System.out.println("┌──────────┐");
+//				System.out.println("<5번 테이블 >");
+//				list = ordersDao.selectAllFoodList(conn, 5);
+//
+//				for (FoodOrders food : list) {
+//					System.out.println(food);
+//				}
+//				System.out.print("합계: ");
+//				System.out.print(ordersDao.selectTotalPrice(conn, 5));
+//				System.out.print("원");
+//				System.out.println();
+//				System.out.println("└──────────┘");
+//
+//			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

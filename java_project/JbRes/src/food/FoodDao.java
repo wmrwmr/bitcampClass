@@ -28,7 +28,7 @@ public class FoodDao {
 		List<Food> list = new ArrayList<Food>();
 		try {
 			stmt = conn.createStatement();
-			String sql = "select * from food";
+			String sql = "select * from food order by fid asc";
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -93,7 +93,7 @@ public class FoodDao {
 		return result;
 	}
 
-//음식 삭제
+	// 음식 삭제
 	public int deleteFood(Connection conn, int fid) {
 		PreparedStatement pst = null;
 		int result = 0;

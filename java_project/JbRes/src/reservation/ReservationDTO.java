@@ -11,8 +11,8 @@ public class ReservationDTO {
 
 	public ReservationDTO() {
 	}
-	
-	public ReservationDTO(int rid, String rdate, String rname, String rphonenumber, int rcount,int tid) {
+
+	public ReservationDTO(int rid, String rdate, String rname, String rphonenumber, int rcount, int tid) {
 		this.rid = rid;
 		this.rname = rname;
 		this.rphonenumber = rphonenumber;
@@ -20,12 +20,13 @@ public class ReservationDTO {
 		this.rdate = rdate;
 		this.tid = tid;
 	}
-	
-	public ReservationDTO(String rdate, String rname, String rphonenumber, int rcount,int tid) {
+
+	public ReservationDTO(String rdate, String rname, String rphonenumber, int rcount, int tid) {
+
 		this.rname = rname;
+		this.rdate = rdate;
 		this.rphonenumber = rphonenumber;
 		this.rcount = rcount;
-		this.rdate = rdate;
 		this.tid = tid;
 	}
 
@@ -79,8 +80,8 @@ public class ReservationDTO {
 
 	@Override
 	public String toString() {
-		return "  " +rid + " \t" + rname + "\t" + rphonenumber + "\t"
-				+ "  " + rcount + "\t" + rdate + "\t" + "  " + tid;
+		return "  " + rid + " \t" + rname + "\t" + rphonenumber + "\t" + "  " + rcount + "\t" + rdate + "\t" + "  "
+				+ tid;
 	}
 
 	public boolean equals(Object o) {

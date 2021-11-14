@@ -47,4 +47,9 @@ public class Food {
 		this.fprice = fprice;
 	}
 
+	@Override
+	public String toString() {
+		return fid + "\t" + fname + "   \t" + fprice;
+	}
+
 }

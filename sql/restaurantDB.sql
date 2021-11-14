@@ -48,6 +48,13 @@ increment by 1
 minvalue 1
 maxvalue 999999;
 
+insert into orders values (ORDERS_ID_SEQ.nextval, 1, 1, sysdate);
+insert into orders values (ORDERS_ID_SEQ.nextval, 3, 3, sysdate);
+insert into orders values (ORDERS_ID_SEQ.nextval, 3, 5, sysdate);
+insert into orders values (ORDERS_ID_SEQ.nextval, 4, 8, sysdate);
+insert into orders values (ORDERS_ID_SEQ.nextval, 4, 9, sysdate);
+insert into orders values (ORDERS_ID_SEQ.nextval, 4, 10, sysdate);
+
 select * from orders;
 
 --------------------------------------------------------------------
@@ -75,9 +82,7 @@ create table members(
     mid number(6) constraint members_id_pk primary key,
     mname varchar2(20) not null,
     mphone varchar2(20) not null unique,
-    mcount number(6) default 1 not null,
-    mrank varchar2(1) default 'N' not null
-    constraint members_rank_ck check (mrank in('N','V'))
+    bonus number(10) default 0 not null
 );
 
 create sequence members_id_seq

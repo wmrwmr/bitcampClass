@@ -7,6 +7,9 @@ import java.util.Scanner;
 import controller.BadInputController;
 import controller.Menu;
 import jdbc.ConnectionProvider;
+import members.Members;
+import members.MembersDao;
+import orders.Orders;
 
 public class FoodViewer {
 	private Scanner scanner;
@@ -15,40 +18,63 @@ public class FoodViewer {
 	List<Food> list = null;
 	Connection conn = null;
 
+	static private FoodViewer dao = new FoodViewer();
+
+	static public FoodViewer getInstance() {
+		return dao;
+	}
+
+	private FoodViewer() {
+	}
+
 	public FoodViewer(Scanner scanner, BadInputController inputC) {
 		this.scanner = scanner;
 		this.inputC = inputC;
 	}
 
 	public void manageFood() {
-		try {
-			conn = ConnectionProvider.getConnection();
-			conn.setAutoCommit(false);
+		while (true) {
+			try {
+				conn = ConnectionProvider.getConnection();
+				conn.setAutoCommit(false);
 
-			System.out.println("---------------------------------------------------------");
-			System.out.println("[" + Menu.SHOW_ALL + "] 현재 음식 목록");
-			System.out.println("[" + Menu.INSERT + "] 새 음식 등록");
-			System.out.println("[" + Menu.EXIT + "] 뒤로 가기");
-			int userChoice = inputC.checkUserChoice("\n> ", Menu.EXIT, Menu.SHOW_ALL);
+				System.out.println();
+				System.out.println("-------------------------------------------------------------------");
+				System.out.print(Menu.F_SHOW_ALL + ". 현재 음식 목록   ");
+				System.out.print(Menu.F_INSERT + ". 새 음식 등록   ");
+				System.out.print(Menu.F_EXIT + ". 뒤로 가기\n");
+				System.out.println("-------------------------------------------------------------------");
+				int userChoice = inputC.checkInt("> ", Menu.F_SHOW_ALL, Menu.F_EXIT);
 
-			if (userChoice == Menu.INSERT) {
-				insert(conn);
+				if (userChoice == Menu.F_INSERT) {
+					insert(conn);
 
-			} else if (userChoice == Menu.EXIT) {
-				// 뒤로가기
+				} else if (userChoice == Menu.F_EXIT) {
+					break;
 
-			} else if (userChoice == Menu.SHOW_ALL) {
-				showAll();
+				} else if (userChoice == Menu.F_SHOW_ALL) {
+					showAll();
+					foodManager(list);
+
+				}
+			} catch (SQLException e) {
+				System.out.println("<fail>");
 			}
-		} catch (SQLException e) {
-			System.out.println("<fail>");
 		}
 	}
 
 	private void insert(Connection conn) {
 		try {
-			String name = inputC.checkStr("새 음식의 이름을 입력해주세요.\n\n> ");
-			String price1 = inputC.checkInt("새 음식의 가격을 입력해주세요.\n\n> ");
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("새 음식의 이름을 입력해주세요.");
+			System.out.println("-------------------------------------------------------------------");
+			String name = inputC.checkStr("> ");
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("새 음식의 가격을 입력해주세요.");
+			System.out.println("-------------------------------------------------------------------");
+			String price1 = inputC.checkInt("> ");
 			int price2 = Integer.parseInt(price1);
 
 			Food food = new Food(name, price2);
@@ -58,8 +84,8 @@ public class FoodViewer {
 				conn.commit();
 				System.out.println("<등록이 완료되었습니다.>");
 			}
-			System.out.println("---------------------------------------------------------");
-			System.out.println("[확인] 계속 진행하려면 엔터를 눌러주세요.\n");
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("[확인] 계속 진행하려면 엔터를 눌러주세요.");
 			scanner.nextLine();
 
 		} catch (SQLException e) {
@@ -69,14 +95,26 @@ public class FoodViewer {
 
 	private void update(int fid) {
 		try {
-			String fname = inputC.checkStr("수정할 음식 이름을 입력하세요");
-			String fprice1 = inputC.checkInt("수정할 음식 가격을 입력하세요");
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("수정할 음식의 이름을 입력해주세요.");
+			System.out.println("-------------------------------------------------------------------");
+			String fname = inputC.checkStr("> ");
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("수정할 음식의 가격을 입력해주세요.");
+			System.out.println("-------------------------------------------------------------------");
+			String fprice1 = inputC.checkInt("> ");
+
 			int fprice2 = Integer.parseInt(fprice1);
 
 			int result = foodDao.updateFood(conn, fid, fname, fprice2);
 			if (result == 1) {
 				conn.commit();
 				System.out.println("<음식정보 변경이 완료되었습니다.>");
+				System.out.println("-------------------------------------------------------------------");
+				System.out.println("[확인] 계속 진행하려면 엔터를 눌러주세요.");
+				scanner.nextLine();
 			}
 
 		} catch (SQLException e) {
@@ -85,42 +123,33 @@ public class FoodViewer {
 	}
 
 	private void foodManager(List<Food> list) {
-		System.out.println("[" + Menu.UPDATE + "] 음식 정보 변경");
-		System.out.println("[" + Menu.DELETE + "] 음식 정보 삭제");
-		System.out.println("[" + Menu.EXIT + "] 뒤로 가기");
-		int userChoice = inputC.checkUserChoice("\n> ", Menu.EXIT, Menu.DELETE);
-		if (userChoice != 0) {
-			System.out.println("---------------------------------------------------------");
-			System.out.println("음식 번호를 입력하거나 취소하려면 [0]을 입력해주세요.");
+		while (true) {
+			System.out.println();
+			System.out.println("-------------------------------------------------------------------");
+			System.out.print(Menu.F_UPDATE + ". 음식 정보 변경   ");
+			System.out.print(Menu.F_DELETE + ". 음식 정보 삭제   ");
+			System.out.print(Menu.F_EXIT + ". 뒤로 가기\n");
+			System.out.println("-------------------------------------------------------------------");
+			int userChoice = inputC.checkInt("> ", Menu.F_UPDATE, Menu.F_EXIT);
 
-			int checkFid = 0;
-			while (checkFid == 0) {
-				int fid = inputC.checkUserChoice("\n> ", 0, list.get(list.size() - 1).getFid());
-
-				checkFid = 0;
-				if (fid != 0) {
-					for (Food food : list) {
-						if (food.getFid() == fid) {
-							checkFid = 1;
-							break;
-						}
-					}
-					if (checkFid == 0) {
-						manageFood();
-					} else {
-						if (userChoice == Menu.UPDATE) {
-							update(fid);
-						} else if (userChoice == Menu.DELETE) {
-							delete(fid);
-						} else if (userChoice == Menu.EXIT)
-							manageFood();
-						System.out.println("---------------------------------------------------------");
-						System.out.println("[확인] 계속 진행하려면 엔터를 눌러주세요.\n");
-						scanner.nextLine();
-					}
-				} else {
-					break;
-				}
+			if (userChoice == Menu.F_UPDATE) {
+				System.out.println();
+				System.out.println("-------------------------------------------------------------------");
+				System.out.println("음식 번호를 입력하거나 취소하려면 [0]을 입력해주세요.");
+				System.out.println("-------------------------------------------------------------------");
+				int fid = inputC.checkInt("> ", 0, list.get(list.size() - 1).getFid());
+				update(fid);
+				break;
+			} else if (userChoice == Menu.F_DELETE) {
+				System.out.println();
+				System.out.println("-------------------------------------------------------------------");
+				System.out.println("음식 번호를 입력하거나 취소하려면 [0]을 입력해주세요.");
+				System.out.println("-------------------------------------------------------------------");
+				int fid = inputC.checkInt("> ", 0, list.get(list.size() - 1).getFid());
+				delete(fid);
+				break;
+			} else if (userChoice == Menu.F_EXIT) {
+				break;
 			}
 		}
 	}
@@ -139,16 +168,32 @@ public class FoodViewer {
 		}
 	}
 
-	private void showAll() {
-		list = foodDao.selectAllFood(conn);
-		if (!list.isEmpty()) {
-			System.out.println("=========================================================");
-			System.out.println("음식 번호\t음식명\t가격\t");
-			System.out.println("=========================================================");
+	public void showAll() {
+		try {
+			conn = ConnectionProvider.getConnection();
+			list = foodDao.selectAllFood(conn);
+			if (!list.isEmpty()) {
+				System.out.println();
+				System.out.println();
+				System.out.println("           < 자비레스 메뉴  >");
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println("음식 번호\t음식명\t\t가격\t");
+				System.out.println("──────────────────────────────────");
 
-			for (Food food : list) {
-				System.out.println(food);
+				for (Food f : list) {
+					String fname = f.getFname();
+					if (fname.length() < 5) {
+						fname += "\t";
+					} else if (fname.length() >= 5 && fname.length() < 7) {
+						fname += "   ";
+					}
+					System.out.println(f.getFid() + "\t" + fname + "\t" + f.getFprice());
+				}
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println();
 			}
+		} catch (SQLException e) {
+			System.out.print("");
 		}
 	}
 }

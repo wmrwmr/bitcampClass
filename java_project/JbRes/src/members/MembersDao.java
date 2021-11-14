@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import jdbc.JdbcUtil;
 
 public class MembersDao {
@@ -111,7 +114,7 @@ public class MembersDao {
 			result = pst.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("<중복된 연락처 또는 잘못된 입력으로 등록에 실패하였습니다.>");
+			JOptionPane.showMessageDialog(null, "중복된 연락처 또는 잘못된 입력으로 등록에 실패하였습니다.");
 		} finally {
 			JdbcUtil.close(pst);
 		}
@@ -134,7 +137,7 @@ public class MembersDao {
 			result = pst.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("<중복된 연락처 또는 잘못된 입력으로 수정에 실패하였습니다.>");
+			JOptionPane.showMessageDialog(null, "중복된 연락처 또는 잘못된 입력으로 수정에 실패하였습니다.");
 		} finally {
 			JdbcUtil.close(pst);
 		}
@@ -144,22 +147,22 @@ public class MembersDao {
 	public int addBonus(Connection conn, int mid, int payment) {
 		PreparedStatement pst = null;
 		int result = 0;
-		int bonus = (int) payment/20;
+		int bonus = (int) payment / 20;
 
 		String sql = "update members set bonus = (select bonus from members where mid=?)+? where mid=?";
 
-			try {
-				pst = conn.prepareStatement(sql);
-				
-				pst.setInt(1, mid);
-				pst.setInt(2, bonus);
-				pst.setInt(3, mid);
+		try {
+			pst = conn.prepareStatement(sql);
 
-				result = pst.executeUpdate();
-				
-			} catch (SQLException e) {
-				System.out.println("<fail>");
-			}
+			pst.setInt(1, mid);
+			pst.setInt(2, bonus);
+			pst.setInt(3, mid);
+
+			result = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("<fail>");
+		}
 		return result;
 	}
 

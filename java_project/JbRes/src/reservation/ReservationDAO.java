@@ -32,7 +32,8 @@ public class ReservationDAO {
 		try {
 			stmt = conn.createStatement();
 
-			String sql = "select * from reservation order by rid";
+			String sql = "select * from reservation order by rid"; // 예약자 정보 출력 시, 예약 정보를 삭제하고 난 후 rid값이 순서대로 정렬이 안되서
+																	// order by 로 재정렬
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -49,7 +50,7 @@ public class ReservationDAO {
 		return result;
 	}
 
-	// 예약 정보 검색
+	// 예약 정보 검색 (예약번호로 검색)
 	public ReservationDTO selectByReservation(Connection conn, int rId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -61,6 +62,37 @@ public class ReservationDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, rId);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				r = new ReservationDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+						rs.getInt(6));
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+
+		return r;
+	}
+
+	// 예약 정보 검색 (예약시간으로 검색)
+	public ReservationDTO selectByReservate(Connection conn, String rDate) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ReservationDTO r = null;
+
+		String sql = "select * from reservation where rDate =?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rDate);
 
 			rs = pstmt.executeQuery();
 
