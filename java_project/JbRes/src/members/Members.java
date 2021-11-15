@@ -10,7 +10,6 @@ public class Members {
 	}
 
 	public Members(int mid, String mname, String mphone, int mcount) {
-		super();
 		this.mid = mid;
 		this.mname = mname;
 		this.mphone = mphone;
@@ -18,7 +17,6 @@ public class Members {
 	}
 
 	public Members(String mname, String mphone) {
-		super();
 		this.mname = mname;
 		this.mphone = mphone;
 	}

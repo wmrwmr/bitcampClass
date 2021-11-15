@@ -182,11 +182,21 @@ public class FoodViewer {
 
 				for (Food f : list) {
 					String fname = f.getFname();
-					if (fname.length() < 5) {
-						fname += "\t";
-					} else if (fname.length() >= 5 && fname.length() < 7) {
-						fname += "   ";
+					
+					for (int i = 1; i <= 6; i++) {
+						String space = "";
+						for (int j = i; j <= 6; j++) {
+							if (fname.length() == i) {
+								space += "　";
+							}
+						}
+						fname += space;
 					}
+					if (fname.length() > 9) {
+						fname = fname.substring(0, 8);
+						fname += "...";
+					}
+
 					System.out.println(f.getFid() + "\t" + fname + "\t" + f.getFprice());
 				}
 				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");

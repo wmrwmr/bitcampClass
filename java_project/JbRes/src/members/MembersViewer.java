@@ -3,9 +3,7 @@ package members;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import controller.BadInputController;
 import controller.Menu;
 import jdbc.ConnectionProvider;

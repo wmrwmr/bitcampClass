@@ -159,13 +159,12 @@ public class OrdersViewer {
 
 						System.out.println();
 						System.out.println("<" + select + "번 테이블 주문내역>");
-						System.out.println();
 						for (FoodOrders food : list) {
 							System.out.println(food.getFname() + " " + food.getFprice());
 						}
-						System.out.println("주문 합계 " + total);
 						System.out.println();
-						System.out.println("결제 하시겠습니까?");
+						System.out.println("-------------------------------------------------------------------");
+						System.out.println("합계 " + total + "원입니다. 결제 하시겠습니까?");
 						System.out.println("-------------------------------------------------------------------");
 						System.out.println("1. 네   2. 아니오");
 						System.out.println("-------------------------------------------------------------------");
@@ -178,43 +177,59 @@ public class OrdersViewer {
 							// -----------------------------------------------------------------------------------------
 							System.out.println();
 							System.out.println();
-							System.out.println("─────────────────────────────────");
+							System.out.println("──────────────────────────────────");
 							System.out.println();
 							System.out.println("              [영수증]");
 							System.out.println();
 							System.out.println();
 							System.out.println("[매장명] 자비레스");
 							System.out.println("[사업자] 285-37-00231");
-							System.out.println("[주소] 서울시 강남구 역삼동 819-3 삼오빌딩 ");
+							System.out.println("[주소] 서울 강남구 역삼동 819-3 삼오빌딩 ");
 							System.out.println("[TEL] 0507-1414-9601");
 							System.out.println("" + sdf.format(now));
-							System.out.println("---------------------------------");
+							System.out.println("----------------------------------");
 							System.out.println("상품명\t\t\t금액");
-							System.out.println("---------------------------------");
+							System.out.println("----------------------------------");
+
 							for (FoodOrders food : list) {
 								String fprice = String.valueOf(food.getFprice());
-								String fprice1 = fprice.substring(0, fprice.length() - 3);
-								String fprice2 = fprice.substring(fprice.length() - 3, fprice.length());
+
+								if (fprice.length() > 3) {
+									String fprice1 = fprice.substring(0, fprice.length() - 3);
+									String fprice2 = fprice.substring(fprice.length() - 3, fprice.length());
+									fprice = fprice1 + "," + fprice2;
+								}
+
 								String fname = food.getFname();
-								if (fname.length() < 7) {
-									fname += "   ";
-								} else if (fname.length() > 9) {
-									fname = fname.substring(0, 9);
+								for (int i = 1; i <= 13; i++) {
+									String space = "";
+									for (int j = i; j < 13; j++) {
+										if (fname.length() == i) {
+											space += "　";
+										}
+									}
+									fname += space;
+								}
+								if (fname.length() > 13) {
+									fname = fname.substring(0, 11);
 									fname += "...";
 								}
-								System.out.println(food.getFname() + "\t\t" + fprice1 + "," + fprice2 + "원");
+								System.out.printf("%s\t%8s원\n", fname, fprice);
+
 							}
-							System.out.println("---------------------------------");
+							System.out.println("----------------------------------");
 							String totalS = String.valueOf(total);
-							String total1 = totalS.substring(0, totalS.length() - 3);
-							String total2 = totalS.substring(totalS.length() - 3, totalS.length());
-							System.out.println("합계 금액      \t\t" + total1 + "," + total2 + "원");
-							System.out.println("---------------------------------");
+							if (totalS.length() > 3) {
+								String total1 = totalS.substring(0, totalS.length() - 3);
+								String total2 = totalS.substring(totalS.length() - 3, totalS.length());
+								totalS = total1 + "," + total2;
+							}
+							System.out.printf("합계 금액\t\t\t%8s원\n", totalS);
+							System.out.println("----------------------------------");
 							System.out.println("              <이용해 주셔서 감사합니다.>");
 							System.out.println();
 							System.out.println();
-							System.out.println();
-							System.out.println("─────────────────────────────────");
+							System.out.println("──────────────────────────────────");
 							System.out.println();
 							System.out.println();
 							// -----------------------------------------------------------------------------------------
@@ -270,11 +285,17 @@ public class OrdersViewer {
 								System.out.println("│(...)\t\t│");
 							} else {
 								fname = list.get(j).getFname();
-								if (fname.length() < 5) {
-									fname += "\t";
-								} else if (fname.length() >= 5 && fname.length() < 7) {
-									fname += "   ";
-								} else if (fname.length() > 9) {
+
+								for (int k = 1; k <= 6; k++) {
+									String space = "";
+									for (int l = k; l <= 6; l++) {
+										if (fname.length() == k) {
+											space += "　";
+										}
+									}
+									fname += space;
+								}
+								if (fname.length() > 10) {
 									fname = fname.substring(0, 9);
 									fname += "...";
 								} else {
@@ -285,7 +306,15 @@ public class OrdersViewer {
 						}
 					} else if (j == 6) {
 						if (list.size() != 0) {
-							System.out.println("│합계 = " + ordersDao.selectTotalPrice(conn, i) + "원\t│");
+							String totalS = String.valueOf(ordersDao.selectTotalPrice(conn, i));
+
+							if (totalS.length() > 3) {
+								String total1 = totalS.substring(0, totalS.length() - 3);
+								String total2 = totalS.substring(totalS.length() - 3, totalS.length());
+								totalS = total1 + "," + total2;
+							}
+
+							System.out.println("│합계 = " + totalS + "원\t│");
 						} else {
 							System.out.println("│\t\t│");
 						}

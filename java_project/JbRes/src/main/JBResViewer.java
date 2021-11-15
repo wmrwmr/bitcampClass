@@ -56,6 +56,7 @@ public class JBResViewer {
 				System.out.println();
 				System.out.print("────────────────────────────[ PAYMENT ]────────────────────────────");
 				int total = ordV.payment();
+
 				if (total != 0) {
 					int yesNo = JOptionPane.showConfirmDialog(null, "마일리지를 적립 하시겠습니까?", "", JOptionPane.YES_NO_OPTION);
 					if (yesNo == JOptionPane.YES_OPTION) {
