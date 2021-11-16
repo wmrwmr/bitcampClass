@@ -1,0 +1,6 @@
+/* 선택자로 선택하고 스타일 적용*/
+
+h1{
+    color: #2196f3;
+    background-color: yellow;
+}
