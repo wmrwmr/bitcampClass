@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 폼</title>
+</head>
+<body>
+    <form action="#" method="get"></form>
+    <h1>로그인 폼</h1>
+    <hr>
+
+    <form>
+
+        <fieldset>
+            <legend>로그인 폼</legend>
+            <form>
+                <table>
+                    <tr>
+                        <td>순번</td>
+                        <td>
+                            <input type="text" value="11"
+                            readonly
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>선택</td>
+                        <td>
+                            <select name="loginType">
+                                <option value="member">회원</option>
+                                <option>admin</option>
+                            </select>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td><label for="userid">아이디</label></td>
+                        <td><input type="text" name="userid" id="userid"
+                            required
+                            placeholder="아이디를 입력하세요"
+                            autofocus
+                            minlength="4"
+                            maxlength="12"
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="pw">비밀번호</label></td>
+                        <td><input type="password" name="password" id="pw"
+                            required
+                            placeholder="비밀번호를 입력하세요">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit"></td>
+                    </tr>
+
+
+                </table>
+
+
+
+
+
+
+            </form>
+
+        </fieldset>
+
+
+        <hr>
+
+        <fieldset>
+            <legend>회원가입 폼</legend>
+            <form>
+                <table>
+                    <tr>
+                        <td><label for="userid">아이디(email)</label></td>
+                        <td><input type="email" name="userid" id="userid"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="pw">비밀번호</label></td>
+                        <td><input type="password" name="password" id="pw"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">이름</label></td>
+                        <td><input type="name" name="name" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for = "userPhoto">사진</label></td>
+                        <td><input type="file" id="userPhoto" name="userPhoto"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="회원가입"></td>
+                    </tr>
+
+
+                </table>
+
+
+
+
+
+
+            </form>
+
+        </fieldset>
+
+
+
+    </form>
+
+</body>
+</html>
