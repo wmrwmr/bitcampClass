@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>기본 선택자</title>
+    <!--기본 선택자-->
+    <style>
+        /* 선택자{속성이름:속성값;속성이름:속성값} */
+        /* * {
+             color: red; 
+             background-color: aqua; 
+        } */
+
+        h1 {
+            background-color: aquamarine;
+        }
+
+        #title {
+            font-style: italic;
+
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .bold1 {
+            font-weight: lighter;
+        }
+
+        p {
+            color: blue;
+        }
+
+        body,
+        h1,
+        p {
+            margin: 0;
+        }
+
+
+        #header {
+            width: 300px;
+            height: 100px;
+
+            background-color: yellow;
+
+            /* margin: 10px 20px 30px 40px;  top right bottom left  */
+            /* margin: 30px 10px; */
+            margin: 0 auto;
+        }
+
+        div#contents {
+            width: 300px;
+            height: 500px;
+
+            background-color: green;
+            margin: 0 auto;
+        }
+
+        h1.title {
+            color: white;
+            font-weight: lighter;
+            background-color: black;
+        }
+    </style>
+
+    <!--속성 선택자-->
+    <style>
+        input[type] {
+            border: 5px solid #000000;
+        }
+
+        input[type=text] {
+            background-color: blue;
+
+        }
+
+        input[type=password] {
+            background-color: chartreuse;
+        }
+    </style>
+
+    <!-- 범위 한정 선택: 자손, 후손 -->
+    <style>
+        #header1 h1 {
+            background-color: white;
+            color: red;
+        }
+
+        #section h1 {
+            color: violet;
+        }
+
+        #header1>h1 {
+            color: blue;
+            font-weight: bold;
+        }
+
+        /* 동위 선택자: +, ~ */
+        #head1+h1 {
+            color: blue;
+        }
+
+        #head1~h2 {
+            background-color: orange;
+        }
+    </style>
+
+
+    <!-- 반응 선택자-->
+    <style>
+        /* 마우스 커서가 특정 요소 위로 올라갔을 때 */
+        h3:hover {
+            color: royalblue;
+            background-color: salmon;
+        }
+
+
+        h3:active {
+            color: blue;
+            background-color: chartreuse;
+        }
+    </style>
+
+
+    <!-- 상태 선택자 -->
+    <style>
+        input:enabled {
+            border: 5px solid #ff0000;
+        }
+
+        input:disabled {
+            background-color: darkgray;
+        }
+
+        input:focus {
+            background-color: darkorange;
+            border: 5px solid darkturquoise;
+        }
+
+        #article {
+            width: 1000px;
+            height: 300px;
+
+            overflow: hidden;
+        }
+
+        input[type=checkbox]:checked+div#article {
+            height: 0px;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+        li:nth-child(2n) {
+            background-color: gold;
+            color: black;
+        }
+
+        li:nth-child(2n+1) {
+            background-color: aquamarine;
+            color: blue;
+        }
+
+        li:first-child {
+            background-color: deeppink;
+            color: white;
+
+            border-radius: 40px 0px 0px 40px;
+        }
+        li:last-child {
+            background-color: deeppink;
+            color: white;
+            border-radius: 0px 40px 40px 0px;
+        }
+
+        /* 리스트 태그를 수평방향으로 나열 */
+        ul {
+            overflow: hidden;
+
+            /* 리스트 스타일 */
+            list-style: none;
+        }
+
+        li {
+            float: left;
+            padding: 10px 30px;
+        }
+
+        #photo {
+            border-radius: 50%;
+            border: 3px solid gray;
+            width: 100px;
+        }
+        
+    </style>
+
+    <!--링크 선택자-->
+    <style>
+
+        a:link {
+            color: green;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: green;
+        }
+
+        a:hover {
+            color: rgb(0, 0, 0);
+            text-decoration: underline;
+        }
+
+    </style>
+
+
+
+</head>
+
+<body>
+
+    test
+    <a>네이버</a>
+    <a href="test">네이버</a>
+    <a href="http://www.naver.com">NAVER</a>
+
+
+
+    <hr>
+
+    <img id="photo" src="images/mini2.jpg" alt="">
+
+    <hr>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+
+
+    </ul>
+
+
+
+    <hr>
+
+
+    <label for="btn">기사 가리기</label> <input id="btn" type="checkbox">
+    <div id="article">
+        <h1>[지스타 2021]슈퍼캣 게임 '그래니의 저택', 위믹스 플랫폼 합류</h1>
+        <p>슈퍼캣이 서비스하는 '그래니의 저택'이 위믹스 플랫폼에 합류한다.
+
+            18일 위메이드와 슈퍼캣에 따르면 슈퍼캣의 게임을 위믹스 플랫폼에 온보딩하기로 합의하고 업무협약(MOU)을 체결했다.
+
+
+            (사진=슈퍼캣)
+            이번 MOU를 통해 슈퍼캣이 서비스하는 게임에 블록체인 기술을 적용하고 위메이드의 블록체인 플랫폼인 위믹스에서 글로벌 시장을 공략한다.
+
+            가장 먼저 위믹스에 등장할 게임은 '그래니의 저택'이다. 위메이드는 유니크한 호러 장르의 탈출 게임 '그래니의 저택'이 위믹스 생태계를 다양화시킬 것으로 기대하고 있다.
+
+
+            김영을 슈퍼캣 대표는 "다양한 문화 영역에서 상상을 현실로 만드는 위메이드와 사업 제휴 협약을 체결하게 돼 기쁘다"며 "위믹스 플랫폼에 슈퍼캣이 서비스하는 게임을 통합하게 된다면 양사에 폭발적인
+            시너지를 안겨줄 것"이라고 말했다.
+
+            현재 위메이드는 위믹스 생태계 확장과 블록체인 사업 전반에 주력하고 있다. '미르4' 글로벌 버전은 동시접속자 130만명을 돌파하며 꾸준히 성장하고 있다. 위메이드는 내년 말까지 위믹스 토큰을
+            기축통화로 하는 게임 100개를 서비스하는 것을 목표로 제시했다.
+
+            장현국 위메이드 대표는 "글로벌 서비스 노하우를 지닌 슈퍼캣의 다양한 게임들이 위믹스에 온보드 돼 기대가 크다"며 "슈퍼캣의 웰메이드 게임들이 블록체인 이코노미를 효과적이고 신속하게 구축할 수
+            있도록 노력할 것"이라고 말했다.
+
+            한편 '바람의나라: 연' 개발사로 잘 알려진 슈퍼캣은 145개국에서 1800만회 이상 다운로드된 '그래니의 저택' 등 히트 게임 타이틀들을 보유하고 있다. 지난 7월 고전 명작 RPG
+            '환세취호전' IP 라이선스 계약을 체결한 슈퍼캣은 2D 도트 그래픽 노하우를 활용한 모바일 캐주얼 RPG로 개발중이다.</p>
+    </div>
+
+
+
+
+
+    <hr>
+
+    <input> <br>
+    <input disabled>
+
+
+
+    <hr>
+
+
+    <h3>반응 선택자</h3>
+
+
+    <hr>
+
+    <div>
+        <h1 id="head1">Header1 - 1</h1>
+        <h1>Header1 - 2</h1>
+        <h2>Header2 - 1</h2>
+        <h2>Header2 - 2</h2>
+        <h2>Header2 - 3</h2>
+        <h2>Header2 - 4</h2>
+        <h2>Header2 - 5</h2>
+    </div>
+
+
+
+    <hr>
+
+
+    <div id="header1">
+        <h1 class="title"> 제목입니다. </h1>
+        <div id="nav">
+            <h1>네비게이션</h1>
+        </div>
+    </div>
+
+    <div id="section">
+        <h1 class="title"> 제목2입니다.</h1>
+        <p>내용이 표현됩니다.</p>
+    </div>
+
+
+
+    <hr>
+
+    <input type="text"> <br>
+    <input type="password">
+    <h2>h2</h2>
+
+    <hr>
+
+    <div id="header">
+        <h1 class="title">HEADER</h1>
+    </div>
+    <div id="contents">
+        <img src="das1.jpg">
+    </div>
+
+    <div id="footer"></div>
+
+
+    <hr>
+
+    <h1 id="title" class="bold1">미국 전기차 스타트업 '피스커'...첫 전기 SUV '오션' 공개</h1>
+    <p class="bold">미국 전기차 스타트업 피스커(Fisker)가 내년 본격적으로 생산을 시작할 첫 SUV 전기자동차(전기차) '오션(Ocean)'을 마침내 공개했다.</p>
+    <p>17일(현지시간) 미국 IT전문매체 엔가젯(engadget), 테크크런치(techcrunch) 등에 따르면 피스커는 오는 19일(현지시간) 미국 로스앤젤레스(LA)에서 열리는 '2021 LA 오토쇼'에
+        앞서 해당 차량을 공개했다. 피스커는 지난 2018년 첫 콘셉트카를 선보인 바 있다.</p>
+    <p class="bold1">17일(현지시간) 미국 IT전문매체 엔가젯(engadget), 테크크런치(techcrunch) 등에 따르면 피스커는 오는 19일(현지시간) 미국 로스앤젤레스(LA)에서 열리는
+        '2021 LA 오토쇼'에 앞서 해당 차량을 공개했다. 피스커는 지난 2018년 첫 콘셉트카를 선보인 바 있다.</p>
+    <h1>footer</h1>
+</body>
+
+</html>
