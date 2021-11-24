@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+
+        // 자바스크립의 변수 특징
+        // 호이스팅 -> 변수 선언과 동시에 초기화 하지 않는경우 자동으로 undefined 를 저장
+
+        // 변수 선언 방법 => var 변수이름(식별자);
+        // var 생명주기 
+        // => 함수 단위로 생명주기가 발생
+        // => 함수 밖에서 선언하면 전역 변수가 된다.
+
+        // 변수에 저장하는 데이터 타입 : 숫자, 문자열, bool, 함수, 객체(배열...)
+
+        var num;  // 전역 변수
+
+        console.log("num =>", num);
+
+
+        // 함수 호출
+        fn();
+
+        // 함수 정의 :  프로그램이 실행 되기전에 먼저 실행된다.
+        function fn(){
+            num = 11;
+            var age = 10; // 함수 내에서 존재하는 변수
+            console.log('age1 =>', age);
+            console.log('num1 =>', num);
+
+            // 상수를 만드는 const => 초기화 후 값을 대입하지 못한다!!!!
+            const no = 7;
+            //no = 777;
+
+            // let : 생명주기가 블록({})을 기준으로 생성
+            for(let i=0; i<5; i++){
+                console.log(i);
+            }
+            console.log('for문 밖에서 출력하는 i=>',i);
+
+        }
+
+
+        console.log('age2 =>', age);
+        console.log('num2 =>', num);
+
+
+        //alert(10+10);
+        //alert(111);
+        //alert('<a href="http://www.naver.com">');
+
+        if (false) {
+            console.log('if=> true');
+        } else {
+            console.log('if=> flase');
+        }
+
+        console.log(true); // 
+        console.log(false); // 
+        console.log('true>false => 1>0 =>', true>false);
+        /* 
+            논리값 true/false 
+            비교연산 ( > < >= <= == != )
+            논리연산 ( && || ! )
+        */
+
+
+        console.log(111);
+        console.log("test \n tester");
+        console.log('age:', 11);
+        console.log('errorCode:', 404);
+        console.log(25.123);
+        // 숫자연산을 위한 산술연산 가능
+        // 숫자는 정수와 실수를 구분하지 않는다.
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
