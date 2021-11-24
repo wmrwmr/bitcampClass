@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        // 함수: 필요한 데이터를 받아서 
+        // -> 데이터를 처리 
+        // -> 필요에 따라 결과를 반환하는 
+        // 기능을 정의하는 코드의 집합
+
+        // 함수의 생성은 function 키워드를 이용해서 생성
+        // 1. 익명함수: 함수 선언시에 이름을 생략해서 생성
+        // -> 변수를 통해서 정의할 때
+        // -> 매개변수에 함수를 전달하는 경우
+        // 2. 명시적 선언 함수: 함수 선언시에 이름을 지정해서 생성
+
+        // fn1(); <-- 오류 발생!!
+        // fn2();
+
+        // // 익명함수 선언 -> 익명함수는 선언시에 만들어짐
+        // var fn1 = function(){
+        //     alert('익명함수 호출');
+        // };
+
+        // window.onload = function(){};
+
+
+
+        // 함수 호출
+        // fn1();
+
+
+        // //함수의 호이스팅으로 함수가 미리 만들어지고 코드가 위에서 아래로 실행(일반적으로 사용)
+        // function fn2() {
+        //     alert('명시적 선언 함수 호출');
+        // };
+
+        // // 익명 함수 재정의
+        // var fn3 = function() {
+        //     alert('fn3');
+
+        // };
+        // var fn3 = function() {
+        //     alert('new fn3');
+        // };
+
+        // //fn3();
+
+        // fn4();
+
+        // function fn4() {
+        //     alert('fn4');
+        // }
+
+        // fn4();
+
+        // function fn4() {
+        //     alert('new fn4');
+        // }
+
+        // fn4();
+
+        ///////////////////////////////////////////////////
+
+        // 매개변수, 반환값이 있는 함수 정의
+        // 매개변수 선언시에는 var 키워드를 사용하지 않는다.
+
+        function add(num1, num2) {
+            return num1 + num2;
+        }
+
+        var result = add(3, 5);
+        // console.log(result);
+
+        var hello = function (name, age) {
+            console.log('안녕하세요. 저는 ' + name + '입니다. 나이는 ' + age + '살 입니다.');
+        };
+
+        // hello('손흥민', 30);
+        // hello('손흥민', 30, 300, '안녕');
+
+
+        // 가변 매개변수 인자의 사용법
+        // function은 기본적으로 arguments 배열을 가진다.
+        // arguments 를 이용하면 가변 매개변수의 인자를 사용할 수 있다.
+
+        function sumAll() {
+            var sum = 0;
+            for (let i = 0; i < arguments.length; i++) {
+                // console.log(i, arguments[i]);
+                sum += arguments[i];
+            }
+            console.log('합: ', sum);
+        }
+
+
+        // sumAll(10, 30, 'String', false, {}, []);
+        // sumAll(1,2,3,4,5,6,7,8,9,10);
+
+        ///////////////////////////////////////////////
+        // return
+        // 1. 함수 종료
+        // 2. 값을 반환 
+
+        // 함수 종료
+        function returnFn() {
+            console.log('AAA');
+            return; // 함수종료
+            console.log('BBB');
+        }
+
+        returnFn();
+
+
+        /////////////////////////////////////////////////////////
+
+        // 콜백 함수 -> 함수를 매개변수로 받는 함수
+
+        // 콜백함수를 받아서 10번 실행하는 함수
+
+        // function callTenTimes(callBackFn) {
+
+        //     // callBackFn = function() {
+        //     //  console.log('call 함수 실행');
+        //     // };
+
+        //     for (let i = 0; i < 10; i++) {
+        //         callBackFn();
+        //     }
+
+        // }
+
+        // var cbFn = function () {
+        //     console.log('callback 함수 실행');
+        // };
+
+        // callTenTimes(cbFn);
+
+        // callTenTimes(
+        //     function () {
+        //         console.log('callback 함수를 익명함수로 정의');
+        //     }
+        // );
+
+        // // 1초마다 화면에 시간 출력
+        // const id = setInterval(function(){
+        //     document.body.innerHTML= '<h1>'+ new Date() + '</h1>';
+        // }, 1000);
+
+        // // 15초 이후에 시간 출력을 멈추게 하는 기능
+        // // clearInterval(ID)
+        // setTimeout(function(){
+        //     clearInterval(id);
+        // }, 1000*15);
+
+
+
+        /////////////////////
+
+        // javascript 문법을 적용한 문자열 생성
+        // var jsStr = '';
+        // jsStr += 'var num11=1000;';
+        // jsStr += 'alert(num11);';
+        
+        // eval(jsStr);
+
+
+        ////////////////////
+
+        // parseInt, parseFloat => 변환 가능한 부분까지 숫자를 변환해서 반환
+        var won = '10000원';
+        var dollar = '1.5$';
+        var percent = '10.5%';
+
+        console.log('Number(won): ', Number(won));
+        console.log('Number(dollar): ', Number(dollar));
+
+        console.log('parseInt(won): ', parseInt(won));
+        console.log('parseInt(dollar): ', parseInt(dollar));
+
+        console.log('parseFloat(won): ', parseFloat(won));
+        console.log('parseFloat(dollar): ', parseFloat(dollar));
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

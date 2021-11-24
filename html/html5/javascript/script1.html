@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- if else if 조건문 실습
+     사용자에게 숫자를 입력 받아 양수, 0, 음수를 구분하는 프로그램
+     사용자에게 숫자를 입력 받아 홀수와 짝수를 구분하는 프로그램 -->
+    
+    <script>
+        var input = prompt('숫자를 입력해주세요', '10');
+        var numInput = Number(input);
+        // if (numInput > 0) {
+        //     alert('양수 입니다.');
+        // } else if(numInput == 0) {
+        //     alert('0 입니다.');
+        // } else {
+        //     alert('음수 입니다.');
+        // }
+
+        // var input = prompt('숫자를 입력해주세요', '10');
+        // var numInput = Number(input);
+        // if (numInput % 2 == 0) {
+        //     alert('짝수 입니다.');
+        // } else {
+        //     alert('홀수 입니다.');
+        // }
+
+        // var msg = (numInput>0) ? '양수' : (numInput<0) ? '음수':'0' ;
+        // console.log('입력된 숫자는 ', msg);
+        console.log('입력된 숫자는', (numInput>0) ? '양수' : (numInput<0) ? '음수':'0' );
+
+
+    </script>
+    
+
+
+</head>
+<body>
+    
+</body>
+</html>
