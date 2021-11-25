@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        var primitiveNumber = 100;
+        var objectNumber = new Number(100);
+
+        console.log('primitiveNumber', typeof (primitiveNumber), primitiveNumber);
+        console.log('objectNumber', typeof (objectNumber), objectNumber.toString());
+
+        // 기본 객체 생성
+
+        var obj1 = {};
+        var obj2 = new Object();
+
+        console.log(typeof (obj1));
+        console.log(typeof (obj2));
+
+        /////////////////////////////////////////////////////////
+
+        var person = {
+            name: '손흥민',
+            age: 30,
+            toString: function () {
+                return this.name + ':' + this.age;
+            }
+        };
+
+        console.log('person', person);
+
+        // alert(person);
+
+        //////////////////////////////////////
+
+        //  숫자 정의하는 객체: Number
+
+        var number = 123.123456789;
+        var objNumber = new Number(number);
+
+        console.log('----------------------------------');
+        console.log(objNumber.toExponential());
+        console.log(objNumber.toFixed());
+        console.log(objNumber.toFixed(1));
+        console.log(objNumber.toFixed(4));
+        console.log(objNumber.toPrecision());
+
+
+        //////////////////////////////////////////////
+
+        console.log('--------------------------------------')
+
+        // 문자열을 다루는 객체: String
+
+        var str = 'Hello';
+        var objectStr = new String("Hello");
+
+        console.log(typeof (str));
+        console.log(typeof (objectStr));
+
+        console.log(str.length);
+        console.log(objectStr.length);
+
+        //////////////////////////////////////////////
+
+        // 배열: Array
+        var arr1 = [1, 2, 3, 4, 5];
+        var arr2 = new Array();
+        var arr3 = new Array(10);
+        var arr4 = new Array(9, 8, 7, 6, 5);
+
+        console.log(arr1);
+        console.log(arr2);
+        console.log(arr3);
+        console.log(arr4);
+
+        console.log(arr1.concat(6, 7, 8));
+        console.log(arr1.join());
+
+        console.log(arr1);
+        console.log(arr1.pop());
+
+        console.log(arr1.reverse());
+        console.log(arr1.slice(1, 4));
+        console.log(arr1);
+
+        console.log(arr1.splice(1));
+        console.log(arr1);
+
+        var arr5 = [101, 77, 300, 23, 50];
+        console.log(arr5);
+
+        arr5.sort(function (left, right) {
+            // return left - right;
+            return right-left;
+           }
+        );
+
+        console.log(arr5);
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

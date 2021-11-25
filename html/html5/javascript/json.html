@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        window.onload = function () {
+
+            // 객체 -> json 포맷의 문자열 -> 브라우저 화면 출력
+            var book = {
+                name: 'FIRSTJAVA',
+                price: 30000,
+                publisher: '연두에디션',
+                author:['aaa', 'bbb']
+            }
+
+            console.log(typeof(book), book);
+
+            // 객체 -> json 포맷의 문자열
+            var jsonStr = JSON.stringify(book);
+
+            console.log(typeof(jsonStr), jsonStr);
+
+            document.body.innerHTML='<h1>' + jsonStr + '</h1>';
+
+            var newStr = '{"name":"열혈 자바","price":28000,"publisher":"오렌지미디어"}';
+
+            // Json 형식의 문자열 -> javascript의 객체로 변경
+            var newObj =JSON.parse('{"name":"열혈 자바","price":28000,"publisher":"오렌지미디어", "author":["111", "222"]}');
+
+            console.log(typeof(newObj), newObj.name, newObj.author);
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
