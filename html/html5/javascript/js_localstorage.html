@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <script>
+
+        if (!localStorage.getItem('id')) {
+            localStorage.setItem('id', 'cool');
+        }
+
+        // 데이터 저장
+        localStorage.setItem('uid', 'hot');
+        console.log('uid 저장');
+
+        // 데이터 가져오기
+        console.log('localStorage의 데이터 가져오기', localStorage.getItem('uid'));
+        console.log('localStorage의 데이터 가져오기', localStorage.getItem('id'));
+
+        // 데이터 삭제
+        // localStorage.removeItem('id');
+
+        // 전체 데이터 삭제
+        localStorage.clear();
+
+        // 데이터 가져오기
+        console.log('localStorage의 데이터 가져오기', localStorage.getItem('uid'));
+        console.log('localStorage의 데이터 가져오기', localStorage.getItem('id'));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

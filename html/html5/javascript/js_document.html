@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        ////////////////////////////////////////////////////////
+
+        // window 객체 확인
+        //console.log(window);
+
+
+        ////////////////////////////////////////////////////////
+
+        // 새로운 윈도우 생성
+
+        //window.open();
+
+        //window.open('http://www.naver.com', 'newWin', 'width=300, height=400');
+
+        //var child = window.open('', 'child', 'width=400, height=300');
+
+        //var html = '<h1 onclick="self.close();">윈도우 닫기</h1>';
+
+        //child.document.write('<h1>부모 윈도우에서 HTML 태그 추가</h1>'+html);
+
+
+        //////////////////////////////////////////////////////////
+
+        // location 객체
+
+        //console.log(location);
+
+        function goNaver(){
+            location.href='https://www.naver.com';
+        }
+
+        ////////////////////////////////////////////////////////////
+
+        // 스크립트와 HTML 태그는 위에서 아래로 순서데로 실행
+
+        //alert(1);
+
+        window.onload = function(){
+            var h1 = document.getElementById('hello');
+            h1.innerHTML='test';
+        };
+        
+
+
+    </script>
+</head>
+<body>
+    <h1 id="hello">안녕하세요</h1>
+    <script>
+        //alert(2);    
+        // var h1 = document.getElementById('hello');
+        // h1.innerHTML='test';    
+    </script>
+    <button onclick="goNaver();">네이버로 이동</button>
+
+    <script>
+        //alert(3);
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        /* 1. 태그 동적 생성
+            1. 태그 엘리먼트 객체를 생성
+            2. 텍스트 노드 객체를 생성 ( 단일 태그 제외 )
+            3. 태그 엘리먼트 객체에 텍스트 노드 객체를 추가
+            4. 태그 엘리먼트가 들어가야 할 위치의 부모 태그를 캐스팅 하고 추가
+
+           2. 정적 파일 ( html 문서에서 이미 만들어져 있는 요소 )에서 생성
+            1. 캐스팅하는 메소드를 이용해서 문서 객체를 생성
+            2. 수정 -> 객체가 가지는 속성을 이용해서 수정
+            3. 삭제 -> 부모 엘리먼트 객체에서 삭제 대상 엘리먼트를 삭제
+                       부모 엘리먼트 객체 필요, 삭제 대상 엘리먼트 객체 필요
+
+        */
+
+        window.onload = function(){
+
+            // h1 태그 엘리먼트 객체 생성
+            var header = document.createElement('h1');
+            var div = document.createElement('div');
+
+            var img = document.createElement('img');
+
+            // 텍스트 노드 생성
+            var text = document.createTextNode('hello~ DOM!!!');
+            var text1 = document.createTextNode('DIV - 1');
+
+            // 텍스트노드를 태그 엘리먼트로 추가
+            header.appendChild(text);
+            div.appendChild(text1);
+
+
+            // img 태그의 속성 추가
+            //img.src='../starwars.png';
+            //img.width=100;
+            //img.height=200;
+            
+            // 속성을 추가하는 메소드
+            img.setAttribute('src', '../mini1.jpg');
+            img.setAttribute('width', 200);
+
+
+
+
+
+            // body 태그 케스팅하고 header 를 추가
+            document.body.appendChild(div);
+            document.body.appendChild(header);
+
+            document.body.appendChild(img);
+
+
+
+            ////////////////////////////////////////////
+
+            // 정적 파일에서 문서객체 생성 : 메소드 이용
+            var header1 = document.getElementById('header1');
+            var header2 = document.getElementById('header2');
+
+            console.log(typeof(header1), header1.innerHTML);
+            console.log(typeof(header2), header2.innerHTML);
+
+            header1.innerHTML='H1 태그 안의 텍스트';
+            header2.innerHTML='다음에 만나요.';
+
+            header1.style.backgroundColor = 'red';
+            header1.style.color = 'yellow';
+            header1.style.marginTop = '100px';
+
+
+            // 태그 이름으로 엘리먼트 캐스팅
+            var headers = document.getElementsByTagName('h2');
+
+            for(let i=0; i<headers.length; i++){
+                headers[i].innerHTML += 'H2 tag - '+i;
+            }
+
+            // 선택자를 이용해서 엘리먼트 캐스팅
+            
+            var header1 = document.querySelector('#header1');
+            console.log(typeof(header1), header1);
+
+            var header2 = document.querySelector('#header1+h2');
+            console.log(typeof(header2), header2);
+
+
+
+            // 요소 삭제 : 부모 테그에서 작식제그를 삭제
+            // 삭제 대상
+            var header3 = document.getElementById('header3');
+            
+            // 삭제할 태그를 포함하고 있는 부모 테그에서 지운다
+            var wrap = document.querySelector('div.wrap');
+
+            wrap.removeChild(header3);
+
+            //document.body.removeChild(header3);
+
+
+        };
+    </script>
+</head>
+<body>
+
+    <h1 id="header1"><i>안녕하세요!</i></h1>
+    <h2 id="header2">반갑습니다.</h2>
+
+    <div class="wrap">
+        <h2 id="header3">제거 대상</h2>
+    </div>
+    
+
+    <hr>
+
+    
+</body>
+</html>
