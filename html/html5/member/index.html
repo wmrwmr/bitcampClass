@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="member.css">
+    <script src="member.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1 class="title">Member Manager</h1>
+    </header>
+
+    <!-- 회원 데이터 입력 폼 시작 -->
+    <div id="regFormArea">
+        <h2 class="subtitle">회원 정보 등록</h2>
+        <!-- <form id="regForm">  -->
+        <!-- form -> submit -> js: 데이터를 받고 객체 -> 배열에 저장 -->
+        <table>
+            <form id="regForm">
+                <tr>
+                    <td><label for="userId">아이디</label></td>
+                    <td><label for="pw">비밀번호</label></td>
+                    <td><label for="repw">비밀번호 확인</label></td>
+                    <td><label for="userName">이름</label></td>
+                    <td rowspan="2">
+                        <input type="submit" value="등록">
+                        <input type="reset">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="userId" name="userId" placeholder="사용자 아이디 입력"></td>
+                    <td><input type="password" id="pw" name="pw" placeholder="비밀번호 입력"></td>
+                    <td><input type="password" id="repw" placeholder="비밀번호 입력"></td>
+                    <td><input type="text" id="userName" name="userName" placeholder="이름 입력"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="msgId" class="msg"></div>
+                    </td>
+                    <td>
+                        <div id="msgPw" class="msg"></div>
+                    </td>
+                    <td>
+                        <div id="msgRePw" class="msg"></div>
+                    </td>
+                    <td>
+                        <div id="msgName" class="msg"></div>
+                    </td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+        <!-- </form> -->
+    </div>
+    <!-- 회원 데이터 입력 폼 끝 -->
+
+    <!-- 회원 정보 리스트 시작-->
+    <div id="memberList">
+        <h2 class="subtitle">회원 리스트</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>순번(index)</th>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>이름</th>
+                    <th>관리</th>
+                </tr>
+
+                <!-- 반복의 대상 -->
+                <tr>
+                    <td>0</td>
+                    <td>cool</td>
+                    <td>1111</td>
+                    <td>김</td>
+                    <td><a href="#">수정</a> | <a href="#">삭제</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- 회원 정보 리스트 끝-->
+
+</body>
+
+</html>
