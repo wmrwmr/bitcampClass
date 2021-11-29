@@ -87,6 +87,48 @@
     </div>
     <!-- 회원 정보 리스트 끝-->
 
+    <!-- 회원 정보 수정 폼 시작 -->
+    <div id="editFormArea">
+        <div id="wrapHeader">
+            <h2 class="subtitle">회원 정보 수정</h2>
+            <a href="javascript:editFormClose();">닫기</a>
+        </div>
+        <form id="editForm">
+            <table>
+                <tr>
+                    <td>아이디</td>
+                    <td>
+                        <input type="text" id="eid" readonly>
+                        <input type="hidden" id="index">
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="password" id="epw"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호 확인</td>
+                    <td><input type="password" id="erepw"></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" id="ename"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="수정">
+                        <input type="button" id="resetBtn" value="초기화">
+                    </td>
+
+                </tr>
+
+            </table>
+        </form>
+    </div>
+
+    <!-- 회원 정보 수정 폼 끝 -->
+
+
 </body>
 
 </html>

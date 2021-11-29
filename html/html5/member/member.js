@@ -5,7 +5,24 @@ var members = [];
 window.onload = function () {
 
     // 회원 리스트 갱신
+    // 로컬 스토리지에 데이터가 존재 하는지 확인 후 처리
+    // getItem(key) 데이터 없으면 null 반환
+    if (localStorage.getItem('members')) {
+        // not null -> 저장되어 있는 JSON 문자열을 ->ㅣ 자바스크립트의 배열로 변경
+        members = JSON.parse(localStorage.getItem('members'));
+
+    } else {
+        // null -> 비어 있는 배열을 저장
+        localStorage.setItem('members', JSON.stringify(members));
+    }
+
+    console.log(members);
+
     setMemberList();
+
+
+
+
 
 
 
@@ -24,7 +41,7 @@ window.onload = function () {
     var userName = document.querySelector('#userName');
 
 
-    // 이벤트 설정: @@@ 입력 시작 @@@
+    ////////////////////////// 이벤트 설정: 입력 이벤트
     regForm.onsubmit = function () {
 
         alert('onsubmit!!');
@@ -89,6 +106,9 @@ window.onload = function () {
         members.push(member);
         console.log('members', members);
 
+        // 저장
+        localStorage.setItem('members', JSON.stringify(members));
+
         // form 초기화
         // this: 이벤트가 발생한 객체 -> regForm
         this.reset();
@@ -116,7 +136,85 @@ window.onload = function () {
 
     // @@@ 입력 끝 @@@
 
-    // 이벤트 
+    /////////////////////////////////////////////////
+    // 수정 폼 이벤트 설정
+
+    var editForm = document.querySelector('#editForm');
+    var index = document.querySelector('#index');
+    // var eid = document.querySelector('#eid');
+    var epw = document.querySelector('#epw');
+    var erepw = document.querySelector('#erepw');
+    var ename = document.querySelector('#ename');
+    var resetBtn = document.querySelector('#resetBtn');
+
+    editForm.onsubmit = function () {
+
+        // index 값 존재 유무 확인!!!!
+        if (index.value.trim().length == 0) {
+            alert('유효한 인덱스 값이 아닙니다.\n프로그램을 다시 시작하세요.');
+            return false;
+        }
+        // epw 공백, 문자 사이즈
+        if (epw.value.trim().length == 0) {
+            alert("비밀번호는 필수 항목 입니다.");
+            epw.focus();
+            return false;
+        } else if (!(epw.value.trim().length >= 4 && epw.value.trim().length <= 10)) {
+            alert("비밀번호는 4~10자리 문자열만 가능합니다.");
+            epw.focus();
+            return false;
+        }
+
+        // erepw 공백, epw 일치 여부
+        if (erepw.value.trim().length == 0) {
+            alert("비밀번호 확인은 필수 항목 입니다.");
+            erepw.focus();
+            return false;
+        } else if (erepw.value != epw.value) {
+            alert("비밀번호가 일치하지 않습니다.");
+            erepw.focus();
+            return false;
+        }
+
+        // ename 공백, 문자열 사이즈
+        if (ename.value.trim().length == 0) {
+            alert("이름은 필수 항목 입니다.");
+            ename.focus();
+            return false;
+        } else if (ename.value.trim().length < 2) {
+            alert("이름은 2글자 이상 입력해야 합니다.");
+            ename.focus();
+            return false;
+        }
+
+        // index 위치의 배열의 요소에 현재 캐스팅한 데이터를 입력
+        members[index.value].pw = epw.value.trim();
+        members[index.value].userName = ename.value.trim();
+
+
+        // 저장
+        localStorage.setItem('members', JSON.stringify(members));
+
+        // 화면 갱신
+        setMemberList();
+
+        alert('수정되었습니다.');
+
+        // 수정 폼 영역 닫기
+        editFormClose();
+
+        return false;
+    };
+
+    resetBtn.onclick = function () {
+        epw.value = members[index.value].pw;
+        erepw.value = members[index.value].pw;
+        // eid.value=members[index.value].userId;
+        ename.value = members[index.value].userName;
+
+    };
+
+
 
 
     // 이벤트 설정: 입력, 수정, 삭제
@@ -155,7 +253,7 @@ function setMemberList() {
             list += '   <td>' + members[i].userId + '</td>';
             list += '   <td>' + members[i].pw + '</td>';
             list += '   <td>' + members[i].userName + '</td>';
-            list += '   <td>' + '<a href="#">수정</a> | <a href="#">삭제</a>' + '</td>';
+            list += '   <td>' + '<a href="javascript:editMemberForm(' + i + ')">수정</a> | <a href="javascript: deleteMember(' + i + ')">삭제</a>' + '</td>';
             list += '</tr>';
 
         }
@@ -163,6 +261,47 @@ function setMemberList() {
 
     // tbody 캐스팅
     document.querySelector('#memberList>table>tbody').innerHTML = list;
+
+}
+
+// 수정 영역을 띄우는 함수: 클릭한 인덱스의 데이터가 폼에 입력
+function editMemberForm(index) {
+    // 수정 폼 영역이 노출되어야 한다!
+    document.getElementById('editFormArea').style.display = 'block';
+
+    var member = members[index];
+
+    document.querySelector('#index').value = index;
+    document.querySelector('#eid').value = member.userId;
+    document.querySelector('#epw').value = member.pw;
+    document.querySelector('#erepw').value = member.pw;
+    document.querySelector('#ename').value = member.userName;
+
+}
+
+
+// 수정 영역을 닫는 함수
+function editFormClose() {
+    document.querySelector('#editFormArea').style.display = 'none';
+}
+
+// 배열의 데이터를 삭제하는 함수
+function deleteMember(index) {
+
+    // 배열의 요소를 삭제: splice(index, count)
+
+    if (confirm('정말 삭제하시겠습니까?')) {
+        members.splice(index, 1);
+
+        // 저장
+        localStorage.setItem('members', JSON.stringify(members));
+
+        alert('삭제되었습니다.');
+
+        // 리스트 갱신
+        setMemberList();
+    }
+
 
 }
 

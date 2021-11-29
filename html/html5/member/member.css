@@ -19,6 +19,22 @@ body {
     font-family: 'Jua', sans-serif;
 }
 
+input[type] {
+    border: 1px solid #aaa;
+    padding: 5px;
+    font-size: 1.2em;
+}
+
+input[type=text], input[type=password] {
+    width: 220px;
+}
+
+input[type=submit], input[type=reset], input[type=button] {
+    width: 100px;
+    height: 70px;
+}
+
+
 /*************************************************/
 /* header 설정 */
 header {
@@ -42,7 +58,7 @@ header>h1 {
     padding: 2px 5px;
 }
 
-#regFormArea input[type] {
+/* #regFormArea input[type] {
     border: 1px solid #aaa;
     padding: 5px;
     font-size: 1.2 em;
@@ -55,7 +71,7 @@ header>h1 {
 #regFormArea input[type=submit], #regFormArea input[type=reset] {
     width: 100px;
     height: 70px;
-}
+} */
 
 div.msg {
     height: 20px;
@@ -86,6 +102,49 @@ div.msg {
     text-align: center;
 }
 
+/*************************************************/
+/* 회원 정보 수정 영역 설정 */
 
+#editFormArea {
+    padding: 20px;
 
+    background-color: wheat;
+
+    width: 400px;
+
+    border: 3px solid #666;
+    border-radius: 10px;
+
+    position: absolute;
+
+    left: 50%;
+    margin-left: -223px;
+
+    top: 100px;
+
+    display: none;
+}
+
+#wrapHeader {
+    overflow: hidden;
+    padding: 10px 0px;
+    border-bottom: 1px solid #aaa;
+
+    margin-bottom: 20px;
+}
+
+#wrapHeader>h2 {
+    float: left;
+}
+
+#wrapHeader>a {
+    float: right;
+
+    line-height: 32px;
+}
+
+#editForm td {
+    padding: 5px 10px;
+    text-align: center;
+}
 
