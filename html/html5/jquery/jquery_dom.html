@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            // 동적 태그{엘리먼트} 생성 - 필요한 위치로 추가
+            $('<h2></h2>').html('다음에 만나요!!!').appendTo('body');
+            $('<h2>다시 만나요!!</h2>').appendTo('body');
+            $('<button onclick = "hi();">나가기</button>').appendTo('body');
+
+
+            // 문서 객체 제거
+            $('h1').remove();
+            $('p').empty();
+
+            
+        });
+
+        function hi(){
+            alert('안녕!!!');
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+    <h1>안녕하세요</h1>
+    <p>반갑습니다. 어서오세요!!!</p>
+</body>
+
+</html>

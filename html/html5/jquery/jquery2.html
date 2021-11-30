@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+    <style>
+        .title {
+            font-size: 200%;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 150%;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .color_blue {
+            color: blue;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+            $('div').removeClass('title');
+            $('div').addClass('subtitle').addClass('color_blue');
+            $('h3').addClass('title');
+
+            var imgSrc = $('#img').attr("src"); // getter: src 속성값을 반환
+            console.log('imgSrc', imgSrc);
+            console.log($('#img').attr('width'));
+
+            var aTag = $('a');
+            var aHerf = aTag.attr('href');
+            aTag.html(aHerf);
+
+            ///////////////////////////////////////////////////////////////////
+            // attr(): setter
+
+            // $('#img1').attr('src', '../mini1.jpg').attr('width', '200');
+            $('#img1').attr({
+                src: '../mini1.jpg',
+                width: 300,
+                // height: function() {
+                //     // 이렇게도 가능
+                // }
+            });
+
+            // attr = index값으로 for문 마냥 돌림
+            $('img').attr('height', function (index) {
+                return 200 + (index * 100)
+            });
+
+            // 특정 속성 삭제 = removeAttr
+            $('img').removeAttr('width');
+
+            ///////////////////////////////////////////////////////////////
+            // css('속성 이름'): 해당 속성의 값을 반환
+            var colorValue = $('div').css('color');
+            console.log(colorValue);
+
+
+            // css(): setter
+            // css('속성 이름', 값)
+            // $('h1').css('background-color', 'blue').css('color', 'white');
+            // css({}); 여러 속성을 한번에 정의
+
+
+            var colors = ['red', 'green', 'blue', '#fff'];
+
+
+            $('h1').css({
+                backgroundColor: '#000',
+                color: function (index) {
+                    return colors[index];
+                }
+            });
+
+            ///////////////////////////////////////////////////////////////
+            // html(), text()
+
+            console.log($('#hello').html());
+            console.log($('#hello').text());
+
+            // html('html string'), text('문자열')
+            $('#hello').html('<h1>안녕!</h1>');
+            $('#hello').text('<h1>안녕!</h1>');
+
+
+        });
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+
+    <div id="hello">
+        <h2>안녕하세요</h2>
+        <p>인사를합시다!!!</p>
+    </div>
+
+
+    <hr>
+
+    <h1>안녕하세요-0</h1>
+    <h1>안녕하세요-1</h1>
+    <h1>안녕하세요-2</h1>
+    <h1>안녕하세요-3</h1>
+
+
+
+    <hr>
+
+
+    <img id="img1">
+
+    <hr>
+
+    <a href="https://www.naver.com"></a>
+
+
+    <hr>
+
+    <img id="img" src="../das1.jpg" width="200">
+
+
+    <hr>
+
+    <div class="title">안녕하세요</div>
+
+    <h3>반갑습니다.</h3>
+
+</body>
+
+</html>
