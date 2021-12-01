@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h1 {
+            border: 1px solid #aaa;
+        }
+
+        h1:hover,
+        div:hover {
+            cursor: pointer;
+        }
+
+        .mover {
+            background-color: aquamarine;
+            color: blue;
+        }
+
+        div {
+            width: 50%;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            /////////////////////click/////////////////////////////
+
+
+            // on메소드
+
+            // // 이벤트 적용: 특정 엘리먼트 캐스팅 -> 이벤트를 연결
+            // $('h1').on('click', function () {
+            //     // this: 클릭 이벤트가 발생한 객체를 가르킨다!
+            //     $(this).html(function (index, html) {
+            //         // return html 형식의 문자열 
+            //         return html + '+';
+            //     });
+            // });
+
+
+            // click 메소드
+            $('h1').click(function () {
+                $(this).html(function (index, html) {
+                    return html + '+';
+                })
+            });
+
+
+            /////////////////////hover/////////////////////////////
+
+            // on메소드
+            // $('h1').on({
+            //     mouseenter: function () {
+            //         $(this).addClass('mover');
+            //     },
+
+            //     mouseleave: function () {
+            //         $(this).removeClass('mover');
+            //     }
+            // });
+
+            // hover 메소드
+            $('h1').hover(function () {
+                $(this).addClass('mover');
+            }, function () {
+                $(this).removeClass('mover');
+
+                // 이벤트 연결 삭제 
+                // (1회용으로 만듬)
+                // $(this).off();
+                // (영구적 적용 시킴)
+                $(this).off('mouseleave');
+
+
+            });
+
+            $('div').click(function (e) {
+                // 이벤트가 발생한 div -> this(한정자)
+                // $('h2', this) -> 이벤트가 발생한 엘리먼트(div) 안에 위치한 h2
+                var h2Str = $('h2', this).text();
+                var pStr = $('p', this).text();
+
+                // alert(h2Str + '\n' + pStr);
+
+                console.log(e);
+
+            });
+
+            $('h3').click(function () {
+                $(this).html(function (index, html) {
+                    return html + '+';
+                });
+            });
+
+
+            // trigger: 이벤트를 자동 실행
+            setInterval(function () {
+                $('h3').trigger('click');
+            }, 1000);
+
+
+            $('a').click(function (e) {
+                console.log('a tag click');
+
+                var ev = e || window.event;
+
+                // 기본 이벤트를 제거: a 태그의 페이지 이동이 안된다!!!
+                ev.preventDefault();
+                // 이벤트 버블링 제거
+                ev.stopPropagation();
+
+                // return false; 위의 두개 합친게 리턴 폴스 -> 리턴 폴스 사용하면 됨
+            });
+
+
+
+            // $('h4').click(function () {
+            //     var length = $('h4').length;
+            //     var targetHtml = $(this).html();
+
+            //     $('#wrap').append('<h4>' + length + ' - ' + targetHtml + '</h4>');
+            // });
+
+            $('#wrap').on('click', 'h4', function () {
+                var length = $('h4').length;
+                var targetHtml = $(this).html();
+
+                $('#wrap').append('<h4>' + length + ' - ' + targetHtml + '</h4>');
+            });
+
+            // @@@@@@@@@@@@@@ 키보드 이벤트 @@@@@@@@@@@@@@
+            $('#memo').keyup(function () {
+                var cnt = $(this).val().length;
+                var remain = 150 - Number(cnt);
+
+                console.log(cnt, remain);
+
+                if (remain < 0) {
+                    alert('메모는 150자까지만 작성이 가능합니다!!');
+                    var str = $(this).val().substr(0, 150)
+                    $(this).val(str);
+                    cnt = 150;
+                }
+
+                $('span').text(cnt);
+            });
+
+
+
+            $('#myForm').submit(function () {
+                // console.log('myForm submit');
+                var uid = $('#uid').val();
+                var pw = $('#pw').val();
+
+                console.log(uid, pw);
+
+
+
+                return false;
+            });
+
+
+            
+            $('#allCheck').change(function(){
+
+                if(this.checked){
+                    // #checkItem 안에 있는 input type=checkbox
+                    $('#checkItem>input:checkbox').prop('checked', true);
+                } else {
+                    $('#checkItem>input:checkbox').prop('checked', false);
+                    
+                }
+
+            });
+
+        });
+
+        function h4Click() {
+
+        };
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <input type="checkbox" id="allCheck">
+    <label for="allCheck">전체동의</label>
+
+    <div id="checkItem">
+        <input type="checkbox" id="item1" value="A"><label for="item1">A Type</label> <br>
+        <input type="checkbox" id="item2" value="B"><label for="item2">B Type</label> <br>
+        <input type="checkbox" id="item3" value="C"><label for="item3">C Type</label> <br>
+        <input type="checkbox" id="item4" value="D"><label for="item4">D Type</label> <br>
+        <input type="checkbox" id="item5" value="E"><label for="item5">E Type</label>
+
+
+    </div>
+
+
+
+
+
+    <hr>
+
+    <form id="myForm">
+
+        <input type="text" id="uid" value="아이디"> <br>
+        <input type="password" id="pw" value="비밀번호">
+
+
+        <br>
+        <input type="submit">
+    </form>
+
+
+
+
+    <textarea id="memo" cols="50" rows="10">
+
+    </textarea>
+    <span>0</span>/150
+
+
+    <div id="wrap">
+        <h4>HEADER</h4>
+    </div>
+
+
+
+    <a href="http://www.naver.com">네이버</a>
+
+    <h3>Click: </h3>
+
+
+    <div>
+        <h2>header - 0</h2>
+        <p>paragraph - 0</p>
+    </div>
+    <div>
+        <h2>header - 1</h2>
+        <p>paragraph - 1</p>
+    </div>
+    <div>
+        <h2>header - 2</h2>
+        <p>paragraph - 2</p>
+    </div>
+
+
+
+    <h1>Click - 0</h1>
+    <h1>Click - 1</h1>
+    <h1>Click - 2</h1>
+
+</body>
+
+</html>

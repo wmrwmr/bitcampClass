@@ -8,7 +8,11 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-
+    <style>
+        #target {
+            border: 1px solid #aaa;
+        }
+    </style>
 
     <script>
         $(document).ready(function () {
@@ -22,10 +26,80 @@
             $('h1').remove();
             $('p').empty();
 
+            // 동적 html 생성
+            $('<h1></h1>'); //h1 태그로 엘리먼트 객체 생성
+            $('<h1></h1>').html('Hello~!!'); // <h1>Hello~!!</h1> 이게 직관적
+            // $('<h1>Hello~!!</h1>');
+
+            // 엘리먼트 요소를 원하는 위치에 추가
+            // appendTo(Target): 타깃 엘리먼트 안의 요소들 마지막 요소 아래에 추가 = append와 위치는 같음 but 대상객체와 동적객체의 순서가 반대
+            $('<h1></h1>').html('Hello~!!').appendTo('#target');
+            $('<h1></h1>').html('Good Bye~!!').appendTo('#target');
+
+            // 이미지 생성
+            $('<img>').attr({
+                src: '../mini1.jpg',
+                width: 200
+            }).appendTo('#target');
+
+            $('<img>', {
+                src: '../images/mini2.jpg',
+                width: 200
+            }).appendTo('#target');
+
+            // prpendTo(Target): 대상 요소의 자식 태그들 중 맨 앞의 요소위에 추가
+            $('<h4>prependTo</h4>').prependTo('#target');
+
+            // insertAfter(Target): 대상의 같은 레벨의 엘리먼트 추가, 대상 뒤에 추가
+            $('<div>insertAfter</div>').insertAfter('#target');
+
+            // insertBefore(Target): 대상의 같은 레벨의 엘리먼트 추가, 대상 앞에 추가
+            $('<div>insertBefore</div>').insertBefore('#target');
+
+            // 대상객체.append(동적 객체)
+            $('#target').append('<h3>append</h3>', '<hr>');
+
+            var h6 = '<h6>prepend h6</h6>';
+            var h5 = '<h5>prepend h5</h5>';
+            var h4 = '<h4>prepend h4</h4>';
+
+            $('#target').prepend(h6, h5, h4);
+
+            // 배열 생성
+            var links = [
+                { name: '네이버', url: 'https://www.naver.com' },
+                { name: '다음', url: 'https://www.daum.net' },
+                { name: '카카오', url: 'https://www.kakao.com' }
+            ];
+
+            //////////////////////////////////////////////////////////////////////////
+
+            // @@@@@ 이게 더 편해보임 @@@@@
+            // $.each(links, function (index, item) {
+            //     let html = '<li>' + item.name + ' = ' + item.url + '</li>';
+            //     $('#links').append(html);
+            // });
+
+            for (let i = 0; i < links.length; i++) {
+                $('#links').append('<li></li>');
+            }
+
+            $('#links>li').append(function (index) {
+                return '<a href = "' + links[index].url + '">' + links[index].name + '</a>';
+
+            });
+
+
+            //////////////////////////////////////////////////////////////////////////
+
+
             
+
+
+
         });
 
-        function hi(){
+        function hi() {
             alert('안녕!!!');
         }
 
@@ -35,6 +109,23 @@
 </head>
 
 <body>
+
+    <ul id="links">
+
+
+
+
+    </ul>
+
+
+
+    <div id="target">
+
+
+
+    </div>
+
+
     <h1>안녕하세요</h1>
     <p>반갑습니다. 어서오세요!!!</p>
 </body>
