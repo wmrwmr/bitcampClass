@@ -5,7 +5,6 @@
 <title>Insert title here</title>
 
 <style>
-
 #head {
 	text-align: center;
 }
@@ -17,7 +16,6 @@
 table {
 	padding-left: 700px;
 }
-
 </style>
 </head>
 <body>
@@ -25,34 +23,59 @@ table {
 	<form action="../SignUpServlet" method="post">
 
 		<table>
-			<tr>
-				<td colspan="2" id="head"><h1>회원가입</h1></td>
-
-			</tr>
-
+			
+			<tr><td colspan="2" id = head><h1>회원가입</h1></td></tr>
+			
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" id="userid" name="userid"
-					placeholder="아이디를 입력하세요"></td>
+				<td><input type="text" name="userid"></td>
 			</tr>
 			<tr>
 				<td>패스워드</td>
-				<td><input type="password" id="pw" name="pw"
-					placeholder="비밀번호를 입력하세요"></td>
+				<td><input type="password" name="pw"></td>
 			</tr>
 			<tr>
-				<td>패스워드(확인)</td>
-				<td><input type="password" id="rePw" name="rePw"
-					placeholder="비밀번호를 입력하세요"></td>
+				<td>패스워드 확인</td>
+				<td><input type="password" name="repw"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" id="userName" name="userName"
-					placeholder="이름을 입력하세요"></td>
+				<td><input type="text" name="username"></td>
 			</tr>
 			<tr>
-				<td colspan="2" id = "btn"><input type="submit" value="회원가입하기"></td>
+				<td>자기소개</td>
+				<td><textarea name="comment" rows="5" cols="25">자기소개를 해주세요.</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>성별</td>
+				<td><input type="radio" name="gender" value="여자" checked>
+					여자 <br> <input type="radio" name="gender" value="남자">
+					남자</td>
+			</tr>
+			<tr>
+				<td>관심사</td>
+				<td><input type="checkbox" name="interest" value="JAVA">
+					JAVA <br> <input type="checkbox" name="interest" value="DB">
+					DB <br> <input type="checkbox" name="interest" value="HTML5">
+					HTML5 <br> <input type="checkbox" name="interest" value="CSS3">
+					CSS3 <br> <input type="checkbox" name="interest"
+					value="JAVASCRIPT"> JAVASCRIPT <br> <input
+					type="checkbox" name="interest" value="Servlet"> Servlet <br>
 
+				</td>
+			</tr>
+			<tr>
+				<td>태어난 년도</td>
+				<td><select name="byear">
+						<option value="2000">2000</option>
+						<option selected>1999</option>
+						<option>1998</option>
+						<option>1997</option>
+				</select></td>
+			</tr>
+						<tr>
+				<td colspan="2" id="btn"> <input type="submit" value="회원가입"> </td>
 			</tr>
 
 		</table>

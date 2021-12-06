@@ -17,10 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
 
 	// jsp는 아닌데 setvlet은 컴파일 필수!!!
+	
+	
 
 	// 사용자가 Get 방식으로 요청할 때 처리하는 메소드
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// Post 방식으로 한글을 받을 때 필수!!!
+		request.setCharacterEncoding("utf-8");
 
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		// request: 사용자의 요청 정보를 모두 가지고 있는 객체
@@ -33,6 +38,9 @@ public class LoginServlet extends HttpServlet {
 		String pw = request.getParameter("pw");
 		System.out.println("userid: " + uid);
 		System.out.println("pw: " + pw);
+		
+
+		response.setContentType("text/xml; charset=utf-8");
 		
 		
 		PrintWriter out = response.getWriter();
