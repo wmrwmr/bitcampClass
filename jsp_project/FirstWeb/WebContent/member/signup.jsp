@@ -9,7 +9,6 @@
 </head>
 <body>
 
-
 	<%
 		request.setCharacterEncoding("utf-8");
 		String uid = request.getParameter("userid");
@@ -58,9 +57,7 @@
 
 	</h1>
 
-	<h1>
-		byear :
-		<%=byear%></h1>
+	<h1>byear : <%=byear%></h1>
 	<br>
 
 
