@@ -25,6 +25,11 @@
 		<url-pattern>/hello</url-pattern>
 		<!-- http://localhost:8080/first/hello -->
 	</servlet-mapping>
+		<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/Hello</url-pattern>
+		<!-- http://localhost:8080/first/Hello -->
+	</servlet-mapping>
 
 
 

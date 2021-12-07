@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
+
+@WebServlet({ "/Login", "/login" })
 // 어노테이션: 자바 문법 아니고, 주석 아니다. 추가적인 처리를 해주는 약속
 // http://localhost:8080/FirstWeb/Login
 // http://localhost:8080/FirstWeb/login -> web.xml에 등록하지 않아도 처리가 가능하게 됨
-@WebServlet({ "/Login", "/login" })
+
 
 public class LoginServlet extends HttpServlet {
 

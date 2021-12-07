@@ -15,7 +15,7 @@ public class SignUpServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// post 방식으로 데이터를 받을 때 한글 인코딩 처리!!! 필수!!!
+				// post 방식으로 데이터를 받을 때 한글 인코딩 처리!!! 필수!!!
 				request.setCharacterEncoding("utf-8");
 				
 				// 데이터 받기
