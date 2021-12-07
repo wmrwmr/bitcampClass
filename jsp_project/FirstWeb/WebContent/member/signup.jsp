@@ -12,40 +12,15 @@
 
 	<%
 		request.setCharacterEncoding("utf-8");
-	%>
-
-	<%
 		String uid = request.getParameter("userid");
-	%>
-	<%
 		String pw = request.getParameter("pw");
-	%>
-	<%
 		String uname = request.getParameter("username");
-	%>
-	<%
 		String comment = request.getParameter("comment");
-	%>
-	<%
 		String gender = request.getParameter("gender");
-	%>
-
-	<%
 		String[] interests = request.getParameterValues("interest");
-	%>
-
-	<%
 		String byear = request.getParameter("byear");
-	%>
-
-
-	<%
 		response.setContentType("text/html; charset=utf-8");
 	%>
-
-
-
-
 
 
 	<h1>
@@ -96,15 +71,6 @@
 		byear :
 		<%=byear%></h1>
 	<br>
-
-
-
-
-
-
-
-
-
 
 
 
