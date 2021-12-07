@@ -23,49 +23,40 @@
 	%>
 
 
-	<h1>
-		uid :
-		<%=uid%></h1>
+	<h1>uid : <%=uid%></h1>
 	<br>
 
-	<h1>
-		pw :
-		<%=pw%></h1>
+	<h1>pw : <%=pw%></h1>
 	<br>
-	<h1>
-		username :
-		<%=uname%></h1>
+	
+	<h1>username : <%=uname%></h1>
 	<br>
-	<h1>
-		comment :
-		<%=comment%></h1>
+	
+	<h1>comment : <%=comment%></h1>
 	<br>
-	<h1>
-		gender :
-		<%=gender%></h1>
+	
+	<h1>gender : <%=gender%></h1>
 	<br>
-	<div>
-		<h1>
+	
+	<h1>
 
-			<%
-				if (interests != null) {
-					for (int i = 0; i < interests.length; i++) {
-			%>
-			interest :
-			<%=interests[i]%>
-			<br>
-			<%
-				}
-				} else {
-			%>
-			interest : 선택된 관심사가 없습니다.<br>
-			<%
-				}
-			%>
+		<%
+			if (interests != null) {
+				for (int i = 0; i < interests.length; i++) {
+		%>
+		interest :
+		<%=interests[i]%>
+		<br>
+		<%
+			}
+			} else {
+		%>
+		interest : 선택된 관심사가 없습니다.<br>
+		<%
+			}
+		%>
 
-		</h1>
-	</div>
-
+	</h1>
 
 	<h1>
 		byear :
