@@ -43,8 +43,7 @@
 			if (interests != null) {
 				for (int i = 0; i < interests.length; i++) {
 		%>
-		interest :
-		<%=interests[i]%>
+		interest : <%=interests[i]%>
 		<br>
 		<%
 			}
