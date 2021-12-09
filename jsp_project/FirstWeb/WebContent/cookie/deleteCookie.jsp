@@ -1,7 +1,10 @@
+<%@page import="util.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	Cookie[] cookies = request.getCookies();
+
+	CookieBox cookieBox = new CookieBox(request);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,12 +29,22 @@
 						
 						// 쿠키의 유효 시간을 0으로 설정
 						c.setMaxAge(0);
-						
 						response.addCookie(c);
 						break;
 					}
 				}
 			}
+			
+			/////////////////////////////////////////
+			// CookieBox를 이용한 쿠키 삭제
+			if(cookieBox.exists("uid")) {
+				response.addCookie(cookieBox.createCookie("uid", "", 0));
+			}
+			
+			
+			
+			
+			
 		%>
 		
 		<a href="viewCookie.jsp">쿠키 보기</a>
