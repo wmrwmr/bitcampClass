@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit"></td>
-				<td><input type="checkbox" name="checkId">아이디 저장하기</td>
+				<td><input type="checkbox" name="checkId"<%= cookieBox.exists("checkId") ? "checked": "" %>> 아이디 저장하기</td>
 			</tr>
 		</table>
 		
