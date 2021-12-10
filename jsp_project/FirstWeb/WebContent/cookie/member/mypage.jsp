@@ -19,7 +19,7 @@
 	<h1>로그인 상태입니다.</h1>
 	<h3>ID: <%= cookieBox.getValue("ID") %></h3>
 	<h3>
-		<a href = "/FirstWeb/cookie/member/logout.jsp">로그아웃</a>
+		<a href = "<%= request.getContextPath() %>/cookie/member/logout.jsp">로그아웃</a>
 	</h3>
 </body>
 </html>
@@ -29,7 +29,7 @@
 		%>
 		<script>
 			alert("로그인이 필요한 페이지입니다!!!");
-			location.href= '/FirstWeb/cookie/member/loginForm.jsp';
+			location.href= '<%= request.getContextPath() %>/cookie/member/loginForm.jsp';
 		</script>
 		<%
 	}

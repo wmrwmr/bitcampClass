@@ -39,7 +39,7 @@
 
 	<h1>로그인 되었습니다.</h1>
 	<h3>
-		<a href="/FirstWeb/cookie/member/mypage.jsp">my page</a>
+		<a href="<%= request.getContextPath() %>/cookie/member/mypage.jsp">my page</a>
 	</h3>
 </body>
 </html>

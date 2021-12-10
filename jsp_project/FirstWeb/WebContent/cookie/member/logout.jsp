@@ -19,7 +19,7 @@
 <body>
 	
 	<h1>로그아웃 되었습니다.</h1>
-	<h3><a href="/FirstWeb/cookie/member/mypage.jsp">my page</a></h3>
+	<h3><a href="<%= request.getContextPath() %>/cookie/member/mypage.jsp">my page</a></h3>
 	
 </body>
 </html>
