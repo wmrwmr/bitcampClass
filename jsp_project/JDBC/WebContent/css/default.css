@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+header>h1 {
+	padding: 10px;
+}
+
+nav {
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+}
+
+nav>ul {
+	overflow: hidden;
+}
+
+nav>ul>li {
+	float: left;
+	padding: 5px; 15px;
+	
+	list-style: none;
+}
