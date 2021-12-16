@@ -14,6 +14,12 @@ select * from project.dept where deptno=?;
 UPDATE dept SET dname=?, loc=? WHERE deptno=?;
 
 
+-- 삭제
+
+DELETE FROM dept WHERE deptno=?;
+
+
+
 
 
 

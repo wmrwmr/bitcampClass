@@ -28,10 +28,27 @@
 #content>table td, #content>table th {
 	border: 1px solid #aaa;
 	text-align: center;
-	
 	width: 700px;
 }
 </style>
+
+<script>
+
+function deleteDept(deptno) {
+	
+	if (confirm('삭제하시겠습니까?')) {
+		// 삭제 처리할 수 있는 url 이동
+		// http://localhost:8080/jdbc/dept/delete.do?deptno=
+			
+		
+		location.href = 'delete.do?deptno='+ deptno;
+		
+	}
+	
+}
+
+
+</script>
 </head>
 <body>
 
@@ -42,8 +59,8 @@
 
 	<div id="content">
 
-		<h2> 부서 리스트 </h2>
-		
+		<h2>부서 리스트</h2>
+
 		<hr>
 
 		<table>
@@ -66,9 +83,11 @@
 						<td>${dept.dname}</td>
 						<td>${dept.loc}</td>
 						<td>
-							<a href = "edit.do?deptno=${dept.deptno}">수정</a> 
-								|
-							삭제
+						<a href="edit.do?deptno=${dept.deptno}">수정</a>
+						 | 
+						<a href="javascript:deleteDept(${dept.deptno})">삭제</a> 
+						
+						
 						</td>
 
 					</tr>

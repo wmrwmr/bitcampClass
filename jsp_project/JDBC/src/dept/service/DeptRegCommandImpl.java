@@ -64,7 +64,10 @@ public class DeptRegCommandImpl implements Command {
 			// request 속성에 저장
 			request.setAttribute("result", regCnt);
 			request.setAttribute("dept", dept);
-
+			
+			// 뷰를 따로 만들지 않고 그냥 리스트로 보내버리기
+			// "redirect:/dept/list.do"
+			
 			view = "/WEB-INF/views/dept/reg.jsp";
 		}
 
