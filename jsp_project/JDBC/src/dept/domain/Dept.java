@@ -2,7 +2,7 @@ package dept.domain;
 
 public class Dept {
 	
-	// DB(dept 테이블) 행 데이터를 표현하는 클래스
+	// DB(dept 테이블) 행 데이터를 표현하는 클래스 (Bins 클래스: 사용자 데이터 받는 클래스와  DB데이터를 받는 클래스 두개로 나뉨)
 	private int deptno;		// 부서번호
 	private String dname;	// 부서이름
 	private String loc;		// 부서 위치

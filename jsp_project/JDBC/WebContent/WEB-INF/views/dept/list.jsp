@@ -65,7 +65,11 @@
 						<td>${dept.deptno}</td>
 						<td>${dept.dname}</td>
 						<td>${dept.loc}</td>
-						<td>수정 | 삭제</td>
+						<td>
+							<a href = "edit.do?deptno=${dept.deptno}">수정</a> 
+								|
+							삭제
+						</td>
 
 					</tr>
 
