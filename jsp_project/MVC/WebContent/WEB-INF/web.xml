@@ -33,7 +33,7 @@
 		
 		<init-param>
 			<param-name>configPath</param-name>
-			<param-value>/WEB-INF/command.properties</param-value>
+			<param-value>/WEB-INF/command.propertise</param-value>
 		</init-param>
 		
 		<load-on-startup>1</load-on-startup>
