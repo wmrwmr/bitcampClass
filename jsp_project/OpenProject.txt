@@ -1,0 +1,40 @@
+# Open Project : MVC 패턴
+1. 회원관리 : 회원가입, 로그인, 리스트, 수정, 삭제
+2. 방명록(게시판) : 리스트, 쓰기, 수정, 삭제, -> 회원만 사용하는 게시판
+
+=================================================
+1. DB 설정
+   - 스키마 : project
+   - 테이블 ( DDL ) : member
+---------------------------
+CREATE TABLE `project`.`member` (
+  `idx` INT NOT NULL AUTO_INCREMENT,
+  `userid` VARCHAR(10) NOT NULL,
+  `password` VARCHAR(20) NOT NULL,
+  `username` VARCHAR(10) NOT NULL,
+  `registdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idx`),
+  UNIQUE INDEX `userid_UNIQUE` (`userid`)
+);
+------------------------------
+   - 필요한 SQL 작성
+
+
+
+2. 프로젝트 생성 -> 세팅 ( MVC, DB, FileUpload )
+   - 라이브러리 추가
+     : 데이터베이스, 파일업로드, JSTL
+   - MVC
+	FrontController(Servlet) -> web.xml 설정 : *.do 
+	-> initParam 으로 configPath web.xml에 저장
+	Command interface, 
+	command.propertise(설정 파일)
+
+
+
+
+
+
+
+
+3. Domain Class
