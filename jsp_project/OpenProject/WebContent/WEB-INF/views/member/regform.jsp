@@ -8,6 +8,18 @@
 
 <%@ include file="/WEB-INF/views/frame/pageset.jsp"%>
 
+<style>
+
+#content>form>table td {
+	padding: 5px;
+}
+#content>form input {
+	padding: 5px;
+}
+
+</style>
+
+
 </head>
 <body>
 
@@ -20,7 +32,7 @@
 	<!-- 네비게이션 끝 -->
 
 	<!-- content 시작 -->
-	<div>
+	<div id="content">
 		<h3>회원 가입</h3>
 		<hr>
 		<!-- form 경로와 처리 경로가 동일 -> method 로 구분 -->

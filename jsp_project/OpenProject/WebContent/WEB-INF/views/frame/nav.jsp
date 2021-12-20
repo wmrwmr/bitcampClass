@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 	<nav>
 		<ul>
-			<li>회원 가입</li>
-			<li>회원 리스트</li>
+			<li><a href="${pageContext.request.contextPath}/member/reg.do">회원 가입</a></li>
+			<li><a href="${pageContext.request.contextPath}/member/list.do">회원 리스트</a></li>
 		</ul>
 	</nav>

@@ -46,6 +46,12 @@ public class RegRequest {
 		return "RegRequest [userid=" + userid + ", pw=" + pw + ", username=" + username + "]";
 	}
 	
+	
+	// RegRequest -> Member
+	public Member getMember() {
+		return new Member(0, this.userid, this.pw, this.username, null);
+	}
+	
 }
 
 

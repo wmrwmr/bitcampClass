@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+* {
+	margin:0;
+	padding:0;
+}
+
+header {
+	padding: 20px;
+}
+header>h1 {
+	font-style:	italic;
+}
+
+nav {
+	padding: 10px;
+	
+	border-top:1px solid #AAA;
+	border-bottom: 1px solid #AAA;
+}
+nav>ul {
+	list-style: none;
+	overflow: hidden;
+}
+nav>ul>li {
+	float: left;
+	padding: 0 15px;
+}
+
+nav+div {
+	padding: 30px;
+}
+nav+div>h3 {
+	font-style: italic;
+}
+nav+div>hr {
+	border: 0;
+	border-top: 1px solid #aaa;
+	
+	margin-top: 5px; 
+	margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

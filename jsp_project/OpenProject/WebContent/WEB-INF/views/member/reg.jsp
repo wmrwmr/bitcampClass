@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 가입</title>
 
 <%@ include file="/WEB-INF/views/frame/pageset.jsp"%>
 
@@ -21,9 +22,13 @@
 
 	<!-- content 시작 -->
 	<div id="content">
-		<h3>/member/index : 회원 관리 프로그램</h3>
+		<h3>회원 가입</h3>
 		<hr>
-		회원 관리의 메인 페이지 입니다.
+		<h3>
+		
+		${result eq 1 ? '회원 가입 완료!!' : result eq 0 ? '회원 가입 실패!' : '서버 오류' }
+		
+		</h3>
 	
 	</div>
 	<!-- content 끝 -->

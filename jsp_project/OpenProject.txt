@@ -7,28 +7,38 @@
    - 스키마 : project
    - 테이블 ( DDL ) : member
 ---------------------------
-CREATE TABLE `project`.`member` (
-  `idx` INT NOT NULL AUTO_INCREMENT,
-  `userid` VARCHAR(10) NOT NULL,
-  `password` VARCHAR(20) NOT NULL,
-  `username` VARCHAR(10) NOT NULL,
-  `registdate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE `member` (
+  `idx` int NOT NULL AUTO_INCREMENT,
+  `userid` varchar(20) COLLATE utf8_bin NOT NULL,
+  `password` varchar(20) COLLATE utf8_bin NOT NULL,
+  `username` varchar(20) COLLATE utf8_bin NOT NULL,
+  `regdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idx`),
-  UNIQUE INDEX `userid_UNIQUE` (`userid`)
-);
+  UNIQUE KEY `id_UNIQUE` (`userid`)
+)
 ------------------------------
    - 필요한 SQL 작성
 
 
 
-2. 프로젝트 생성 -> 세팅 ( MVC, DB, FileUpload )
+2. 프로젝트 생성 -> 세팅 ( MVC, DB, FileUpload, 정적 파일 경로 )
    - 라이브러리 추가
      : 데이터베이스, 파일업로드, JSTL
    - MVC
-	FrontController(Servlet) -> web.xml 설정 : *.do 
-	-> initParam 으로 configPath web.xml에 저장
+	FrontController(Servlet) 
+	-> web.xml 설정 : *.do 
+	-> initParam 으로 configPath(command.propertise) web.xml에 저장
+	-> 서블릿은 파라미터 값을 읽고 실행
 	Command interface, 
 	command.propertise(설정 파일)
+   - 데이터베이스
+	- 드라이버 초기화 하는 servlet : Loader -> web.xml 설정 ( 시작시에 1번 실행 )
+	- Connection 객체를 제공하는 : ConnectionProvider
+	- JdbcUtil : close() 메소드 -> Connection, Statement, ResultSet
+   - EncodingFilter
+	- 사용자 입력 데이터의 한글처리 : web.xml 설정
+   - 파일 업로드
+	- 업로드 폴더 설정 : /uploadfile
 
 
 
