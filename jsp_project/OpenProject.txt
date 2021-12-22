@@ -39,12 +39,40 @@ CREATE TABLE `member` (
 	- 사용자 입력 데이터의 한글처리 : web.xml 설정
    - 파일 업로드
 	- 업로드 폴더 설정 : /uploadfile
-
-
-
-
-
-
-
+   - css, js, image 폴더 생성
 
 3. Domain Class
+   - 사용자의 요청 데이터를 담는 beans ( domain class ) : RegRequest
+   - DB 데이터를 담는 beans ( domain class ) : Member
+
+4. 각각의 요청의 응답 페이지 생성
+   - 설정 -> Command 클래스 생성 -> Service -> Dao -> JSP
+   	설정 : 사자용자의 요청 <Url-처리 클래스> 등록
+	Command 클래스 : 요청을 처리하고 응답을 request|session 에 저장, view 지정
+	Service 클래스 : 핵심 처리, 데이터 처리( 가공 )
+	Dao : 데이터베이스 처리 ( CRUD )
+	JSP : 사용자에게 응답할 뷰 처리
+
+	1. 회원 가입 : /member/reg.do=member.command.MemberRegCommandImpl
+	   - 가입 폼 : GET
+	   - 가입 처리 : POST
+	   - 회원 프로필 사진 추가 : table 수정 -> domain class 변경 -> Service -> Dao
+
+	2. 회원 로그인 : /member/login.do=member.command.LoginCommandImpl
+	   - 로그인 폼 : GET
+	   - 로그인 처리 : POST
+		- 사용자 데이터 id pw 확인
+		- 로그인 정보를 가지는 클래스 생성 : LoginInfo -> userid, username, photo
+
+	3. 로그아웃 : /member/logout.do=member.command.LogoutCommandImpl
+
+	4. 개인화 페이지 Mypage : /member/my/mypage.do=member.command.MyPageCommandImpl
+	   - 로그인 여부 확인 후
+		: 로그인 상태이면 회원 정보 모두를 출력 
+		: 비 로그인 상태 이면 로그인 폼으로 이동
+
+
+
+
+
+

@@ -5,60 +5,60 @@ public class RegRequest {
 	private String userid;
 	private String pw;
 	private String username;
+	private String fileName;
 
 	public RegRequest() {
 
 	}
 
-	public RegRequest(String userid, String pw, String username) {
-		super();
+	public RegRequest(String userid, String pw, String username, String fileName) {
 		this.userid = userid;
 		this.pw = pw;
 		this.username = username;
+		this.fileName = fileName;
 	}
 
-	public final String getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public final void setUserid(String userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
-	public final String getPw() {
+	public String getPw() {
 		return pw;
 	}
 
-	public final void setPw(String pw) {
+	public void setPw(String pw) {
 		this.pw = pw;
 	}
 
-	public final String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public final void setUsername(String username) {
+	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	@Override
 	public String toString() {
-		return "RegRequest [userid=" + userid + ", pw=" + pw + ", username=" + username + "]";
+		return "RegRequest [userid=" + userid + ", pw=" + pw + ", username=" + username + ", fileName=" + fileName
+				+ "]";
 	}
-	
-	
+
 	// RegRequest -> Member
 	public Member getMember() {
-		return new Member(0, this.userid, this.pw, this.username, null);
+		return new Member(0, this.userid, this.pw, this.username, null, null);
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-

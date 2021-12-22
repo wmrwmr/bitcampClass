@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 가입</title>
+<title>로그인</title>
 
 <%@ include file="/WEB-INF/views/frame/pageset.jsp"%>
 
@@ -33,35 +33,26 @@
 
 	<!-- content 시작 -->
 	<div id="content">
-		<h3>회원 가입</h3>
+		<h3>로그인</h3>
 		<hr>
 		<!-- form 경로와 처리 경로가 동일 -> method 로 구분 -->
-		<!-- action="reg.do" 생략 가능 -->
-		<form action="reg.do" method="post" enctype="multipart/form-data">
+		<form method="post">
 			<table>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="userid"></td>
+					<td><input type="text" name="userid" value="${cookie.saveId != null ? cookie.saveId.value : ''}"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
 					<td><input type="password" name="pw"></td>
 				</tr>
 				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="password"></td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="username"></td>
-				</tr>
-				<tr>
-					<td>사진</td>
-					<td><input type="file" name="photo"></td>
-				</tr>
+					<td></td>
+					<td> <input type="checkbox" name="saveid" value="on" ${cookie.saveId != null ? 'checked' : ''}> 아이디 저장하기</td>
+				</tr>				
 				<tr>
 					<td></td>
-					<td> <input type="submit" value="회원가입"> <input type="reset"> </td>
+					<td> <input type="submit" value="로그인"> <input type="reset"> </td>
 				</tr>			
 			</table>
 		
