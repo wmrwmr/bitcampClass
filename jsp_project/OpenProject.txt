@@ -87,8 +87,11 @@ CREATE TABLE `member` (
 	   - idx 값을 받아서 form 생성
 	   - 폼 페이지 : GET
 	   - 수정 처리 : POST
+		- 파일처리
 
-	7. 회원 정보 삭제
+	7. 회원 정보 삭제 : /member/manager/delete.do=member.command.MemberDeleteCommandImpl
+	   - idx 값을 받아서 삭제 처리
+	   - DB 행을 삭제, 파일이 있는경우 삭제
 
 
 

@@ -14,6 +14,9 @@
 /member/manager/list.do=member.command.MemberListCommandImpl
 # Member Edit
 /member/manager/edit.do=member.command.MemberEditCommandImpl
+# Member Delete
+/member/manager/delete.do=member.command.MemberDeleteCommandImpl
+
 
 
 
