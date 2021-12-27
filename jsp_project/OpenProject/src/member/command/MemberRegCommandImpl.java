@@ -3,6 +3,7 @@ package member.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.Command;
 import member.service.MemberRegService;
 
 public class MemberRegCommandImpl implements Command {

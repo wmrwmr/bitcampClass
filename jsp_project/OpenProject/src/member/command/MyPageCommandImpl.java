@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import command.Command;
 import member.service.MyPageService;
 
 public class MyPageCommandImpl implements Command {

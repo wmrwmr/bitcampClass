@@ -37,10 +37,17 @@ update member set password=?, username=?, photo=? where idx=?
 ;
 
 -- delete
-DELETE FROM `project`.`member`
-WHERE idx=;
+DELETE FROM `project`.`member` WHERE idx=7;
+DELETE FROM member WHERE idx=?;
 
 
 
 
+-- update
+update project.guestbook 
+set regdate=CURRENT_TIMESTAMP, CONTENT=? WHERE IDX=2;
+
+
+
+select * from project.guestbook;
 select * from project.member;

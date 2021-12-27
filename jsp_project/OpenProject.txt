@@ -94,6 +94,30 @@ CREATE TABLE `member` (
 	   - DB 행을 삭제, 파일이 있는경우 삭제
 
 
+# 방명록( 게시판 )
+	1. DB 설정
+		+ GuestBook
+		  - 내용
+		  - 제목
+		  - 작성 일시
+		  - Member_PK : FK 설정
+		+ reply (댓글)
+		  - 작성자
+		  - 비밀번호
+		  - 내용
+	 	  - 작성일시
+		  - GuestBook_PK : FK 설정
+		  - Member_PK : FK 설정
+		
+
+
+
+
+
+
+
+
+
 
 
 

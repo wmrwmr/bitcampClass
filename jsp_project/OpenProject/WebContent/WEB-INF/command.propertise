@@ -17,6 +17,20 @@
 # Member Delete
 /member/manager/delete.do=member.command.MemberDeleteCommandImpl
 
+#################################################################
+
+# GuestBook insert
+/guestbook/write.do=guestbook.command.GuestBookWriteCommandImpl
+# GuestBook list
+/guestbook/list.do=guestbook.command.GuestBookListCommandImpl
+# GuestBook view
+/guestbook/view.do=guestbook.command.GuestBookViewCommandImpl
+# GuestBook edit
+/guestbook/edit.do=guestbook.command.GuestBookEditCommandImpl
+# GuestBook delete
+/guestbook/delete.do=guestbook.command.GuestBookDeleteCommandImpl
+
+
 
 
 

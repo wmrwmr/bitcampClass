@@ -16,5 +16,8 @@
 			<li><a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li>
 			</c:if>
 			
+			<li><a href="${pageContext.request.contextPath}/guestbook/write.do">방명록 글쓰기</a></li>
+			<li><a href="${pageContext.request.contextPath}/guestbook/list.do">방명록 리스트</a></li>
+			
 		</ul>
 	</nav>

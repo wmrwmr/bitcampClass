@@ -11,7 +11,7 @@ public class ConnectionProvider {
 		
 		String url = "jdbc:mysql://localhost:3306/project?serverTimezone=UTC";
 		
-		return DriverManager.getConnection(url, "bit", "123");
+		return DriverManager.getConnection(url, "bit", "bit");
 		
 	}
 	

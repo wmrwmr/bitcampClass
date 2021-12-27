@@ -3,6 +3,8 @@ package member.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.Command;
+
 public class MemberIndexCommandImpl implements Command {
 
 	@Override
