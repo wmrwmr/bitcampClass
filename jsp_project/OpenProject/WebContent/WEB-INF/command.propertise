@@ -8,6 +8,11 @@
 /member/login.do=member.command.LoginCommandImpl
 # Logout
 /member/logout.do=member.command.LogoutCommandImpl
+
+# member idcheck
+/member/checkid.do=member.command.CheckIdCommandImpl
+
+
 # MyPage
 /member/my/mypage.do=member.command.MyPageCommandImpl
 # Member List
@@ -16,6 +21,8 @@
 /member/manager/edit.do=member.command.MemberEditCommandImpl
 # Member Delete
 /member/manager/delete.do=member.command.MemberDeleteCommandImpl
+
+
 
 #################################################################
 
@@ -29,6 +36,9 @@
 /guestbook/edit.do=guestbook.command.GuestBookEditCommandImpl
 # GuestBook delete
 /guestbook/delete.do=guestbook.command.GuestBookDeleteCommandImpl
+
+
+/guestbook/writeajax.do=guestbook.command.GuestBookWriteAjaxCommandImpl
 
 
 

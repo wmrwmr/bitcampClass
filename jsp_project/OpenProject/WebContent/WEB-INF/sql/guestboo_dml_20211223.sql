@@ -45,6 +45,14 @@ select g.idx as idx, g.subject as subject, g.content as content, m.username as u
 
 
 
+-- 아이디 중복 체크 sql
+select count(*) from project.member where userid='test@gmail.com';
+select count(*) from project.member where userid=?;
+
+select * from project.member;
+
+select * from project.guestbook;
+
 
 
 

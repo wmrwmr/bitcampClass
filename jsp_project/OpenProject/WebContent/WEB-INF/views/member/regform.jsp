@@ -17,7 +17,63 @@
 	padding: 5px;
 }
 
+#msg {
+	display: none;
+}
+
+.text_red {
+	color : red;
+}
+.text_blue {
+	color: blue;
+}
+
 </style>
+<script>
+	
+	$(document).ready(function(){
+		
+		$('#userid').focusin(function(){
+			$('#msg').css('display', 'none');
+			$('#msg').removeClass('text_blue');
+			$('#msg').removeClass('text_red');
+			$('#msg').text('');
+		});
+		
+		$('#userid').focusout(function(){
+			
+			$.ajax({
+				url : 'checkid.do',
+				type : 'get',
+				data : {
+					userid : $('#userid').val()
+				},
+				success : function(data){
+					// Y | N
+					if(data == 'Y') {
+						// 사용 가능한 아이디
+						$('#msg').css('display', 'block');
+						$('#msg').text('멋진 아이디 입니다!');
+						$('#msg').addClass('text_blue');
+						
+					} else {
+						// 사용 불가능한 아이디
+						$('#msg').css('display', 'block');
+						$('#msg').text('사용중이거나 탈퇴한 아이디 입니다!');
+						$('#msg').addClass('text_red');
+					}
+				},
+				error : function() {
+					console.log('비동기 통신 오류');
+				}
+			});
+			
+		});
+		
+	});
+	
+	
+</script>
 
 
 </head>
@@ -41,7 +97,15 @@
 			<table>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="userid"></td>
+					<td>  
+					<!-- 
+					http://localhost:8080/op/member/checkid.do?id=coo@gmail.com
+					1 | 0, Y | N
+					 -->
+					<input type="text" name="userid" id="userid">
+					<div id="msg"></div>
+					
+					</td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>

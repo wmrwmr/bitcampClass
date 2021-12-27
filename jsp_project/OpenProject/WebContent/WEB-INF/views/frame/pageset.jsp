@@ -6,4 +6,4 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css">
 
 <!-- JS -->
-<%-- <script src="${pageContext.request.contextPath}/js/index.js"></script> --%>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
