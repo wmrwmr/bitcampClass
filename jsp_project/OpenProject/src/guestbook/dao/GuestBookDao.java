@@ -54,7 +54,7 @@ public class GuestBookDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select g.idx as idx , g.subject as subject, g.content as content, g.regdate as regdate, m.username as username, m.photo as photo from project.guestbook g join project.member m on g.memberidx=m.idx order by regdate desc limit ?, ?";
+		String sql = "select g.idx as idx , g.subject as subject, g.content as content, g.regdate as regdate, m.username as username, m.photo as photo from guestbook g join member m on g.memberidx=m.idx order by idx desc limit ?, ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

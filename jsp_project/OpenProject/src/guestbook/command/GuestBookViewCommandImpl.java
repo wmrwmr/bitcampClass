@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
 import guestbook.service.GuestBookViewService;
+import guestbook.service.ReplyListService;
 
 public class GuestBookViewCommandImpl implements Command {
 
@@ -13,6 +14,8 @@ public class GuestBookViewCommandImpl implements Command {
 		
 		//System.out.println(GuestBookViewService.getInstance().getPageView(request, response));
 		request.setAttribute("pageView", GuestBookViewService.getInstance().getPageView(request, response));
+		
+		request.setAttribute("replyList", ReplyListService.getInstance().getList(request));
 		
 		return "/WEB-INF/views/guestbook/view.jsp";
 	}

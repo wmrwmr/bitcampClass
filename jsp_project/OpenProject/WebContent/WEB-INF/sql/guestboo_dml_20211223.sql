@@ -47,19 +47,39 @@ select g.idx as idx, g.subject as subject, g.content as content, m.username as u
 
 -- 아이디 중복 체크 sql
 select count(*) from project.member where userid='test@gmail.com';
-select count(*) from project.member where userid=?;
+select count(*) from member where userid=?
+;
 
 select * from project.member;
 
 select * from project.guestbook;
 
+select * from project.reply;
 
 
 
 
 
+# reply insert
+INSERT INTO project.reply (content, memberidx, guestbookidx) VALUES ( 'test', 11, 7);
+INSERT INTO project.reply (content, memberidx, guestbookidx) VALUES (?, ?, ?);
 
 
+# replyListItem
+select r.idx, r.content, r.regdate, r.memberidx, r.guestbookidx, m.username, m.photo
+from project.member m join project.reply r
+on m.idx=r.memberidx
+where r.guestbookidx=8
+;
 
+select r.idx, r.content, r.regdate, r.memberidx, r.guestbookidx, m.username, m.photo from member m join reply r on m.idx=r.memberidx where r.guestbookidx=?
+;
 
+select * from project.reply;
+
+# Reply  Delete
+delete from project.reply where idx=3;
+
+delete from reply where idx=?
+;
 

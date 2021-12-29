@@ -2,8 +2,14 @@
 # 설정 파일에 등록 -> Command 클래스 생성 -> view(JSP) 생성
 # member Index
 /member/index.do=member.command.MemberIndexCommandImpl
+
 # member Reg : form page
 /member/reg.do=member.command.MemberRegCommandImpl
+
+# reg => ajax
+/member/reg2.do=member.command.MemberRegCommandImpl2
+
+
 # Login
 /member/login.do=member.command.LoginCommandImpl
 # Logout
@@ -28,17 +34,37 @@
 
 # GuestBook insert
 /guestbook/write.do=guestbook.command.GuestBookWriteCommandImpl
+
+/guestbook/writeAjax.do=guestbook.command.GuestBookWriteAjaxCommandImpl
+
+
 # GuestBook list
 /guestbook/list.do=guestbook.command.GuestBookListCommandImpl
 # GuestBook view
 /guestbook/view.do=guestbook.command.GuestBookViewCommandImpl
-# GuestBook edit
+
+# GuestBook Edit
 /guestbook/edit.do=guestbook.command.GuestBookEditCommandImpl
+
 # GuestBook delete
 /guestbook/delete.do=guestbook.command.GuestBookDeleteCommandImpl
 
 
-/guestbook/writeajax.do=guestbook.command.GuestBookWriteAjaxCommandImpl
+###############################################################
+
+# Reply Write 
+/guestbook/reply/write.do=guestbook.command.GuestBookReplyWriteCommandImpl
+# 응답데이터가 html : 댓글 항목을 표현하는
+/guestbook/reply/write2.do=guestbook.command.GuestBookReplyWriteCommandImpl2
+# 응답 데이터가 JSON
+/guestbook/reply/write3.do=guestbook.command.GuestBookReplyWriteCommandImpl3
+
+
+
+
+
+# Reply Delete
+/guestbook/reply/delete.do=guestbook.command.GuestBookReplyDeleteCommandImpl
 
 
 
