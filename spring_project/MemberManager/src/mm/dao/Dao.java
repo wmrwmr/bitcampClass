@@ -5,7 +5,7 @@ import java.util.Collection;
 import mm.domain.Member;
 
 public interface Dao {
-	
+
 	// 회원 정보 저장
 	void insert(Member member);
 	
@@ -18,3 +18,12 @@ public interface Dao {
 	// 전체 데이터 반환
 	Collection<Member> selectAll();
 }
+
+
+
+
+
+
+
+
+

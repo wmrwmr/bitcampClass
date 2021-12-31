@@ -6,4 +6,6 @@ public class DuplicateMemberException extends Exception {
 		super(message);
 	}
 
+	
+	
 }

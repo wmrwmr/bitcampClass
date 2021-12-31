@@ -5,16 +5,13 @@ import java.util.Date;
 import mm.exception.IdPasswordNotMatchingException;
 
 public class Member {
+
 	// 아이디, 이메일, 비밀번호, 이름, 가입일시
 	private long id;
 	private String email;
 	private String password;
 	private String name;
 	private Date regDate;
-
-	public Member() {
-
-	}
 
 	public Member(long id, String email, String password, String name, Date regDate) {
 		this.id = id;
@@ -63,14 +60,16 @@ public class Member {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
+	
 	// 비밀번호 변경 메소드
 	public void changePassword(String oldPw, String newPw) throws IdPasswordNotMatchingException {
-		if (!this.password.equals(oldPw)) {
-			throw new IdPasswordNotMatchingException("비밀번호가 일치하지 않습니다.");
-			// throws 를 던질 때도 IdPasswordNotMatchingException 타입으로 넘겨줘야 한다.
+		
+		if(!this.password.equals(oldPw)) {
+			throw new IdPasswordNotMatchingException("비빌번호 일치하지 않습니다.");
 		}
+		
 		this.password = newPw;
+		
 	}
 
 }

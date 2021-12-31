@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 
+		id : 객체(bean) 구별하기 위한 식별자
+		class : 객체 생성을 위한 클래스 이름 -> full name 사용 
+	-->
+	<bean id="memberDao"
+		  class="mm.dao.MemberDao"/>
+	<!-- </bean> -->
+	
+	<bean id="regService"
+		  class="mm.service.MemberRegService">
+		  
+		  <!-- 생성자 주입 방식 -->
+		  <constructor-arg ref="memberDao"/>
+		  	<!-- <ref bean="memberDao"/> -->		  
+		  <!-- </constructor-arg> -->
+	</bean>
+	
+	<bean id="changeService"
+		  class="mm.service.ChangePasswordService"
+	>
+		<!-- 메소드 주입 방식 -->
+		<property name="dao" ref="memberDao"> <!-- setDao() -->
+			<!-- <ref bean="memberDao"  /> -->
+		</property>
+	</bean>
+
+</beans>

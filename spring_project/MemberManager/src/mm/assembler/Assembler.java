@@ -5,8 +5,9 @@ import mm.service.ChangePasswordService;
 import mm.service.MemberRegService;
 
 public class Assembler {
+
 	// 조립기
-	// 객체를 관리: 객체 생성 (의존 설정), 보관, 제공
+	// 객체를 관리 : 객체 생성( 의존 설정 ), 보관, 제공
 
 	// 보관
 	private MemberDao dao;
@@ -16,12 +17,9 @@ public class Assembler {
 	// 객체 생성
 	public Assembler() {
 		dao = new MemberDao();
-
-		// setter를 통한 주입
 		regService = new MemberRegService();
-		regService.setDao(dao);
-
-		// 생성자를 통한 주입
+		//regService.setDao(dao);
+		regService.setDao(new MemberDao());
 		passwordService = new ChangePasswordService(dao);
 	}
 

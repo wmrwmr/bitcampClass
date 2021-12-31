@@ -2,7 +2,11 @@ package mm.main;
 
 import java.util.Scanner;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 import mm.assembler.Assembler;
+import mm.dao.MemberDao;
 import mm.domain.RegRequest;
 import mm.exception.DuplicateMemberException;
 import mm.exception.IdPasswordNotMatchingException;
@@ -10,11 +14,13 @@ import mm.exception.NotFoundMemberException;
 import mm.service.ChangePasswordService;
 import mm.service.MemberRegService;
 
-public class MemberManager {
+public class MemberManagerSpring2 {
 
-	static Assembler assembler = new Assembler();
+	static ApplicationContext ctx;
 
 	public static void main(String[] args) {
+		
+		ctx = new GenericXmlApplicationContext("classpath:appCtx3.xml");
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -48,7 +54,8 @@ public class MemberManager {
 	
 	private static void processChangePassword(String[] values) {
 		
-		ChangePasswordService changePassword = assembler.getPasswordService();
+		// ChangePasswordService changePassword = assembler.getPasswordService();
+		ChangePasswordService changePassword = ctx.getBean("changeService", ChangePasswordService.class);
 		
 		// change 
 		// son@gmail.com 
@@ -70,7 +77,8 @@ public class MemberManager {
 
 	private static void processNewMember(String[] values) {
 		
-		MemberRegService regService = assembler.getRegService();
+		//MemberRegService regService = assembler.getRegService();
+		MemberRegService regService = ctx.getBean("regService", MemberRegService.class);
 		
 		// new 0 
 		// son@gmail.com 1 

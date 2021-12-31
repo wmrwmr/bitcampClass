@@ -3,6 +3,7 @@ package mm.domain;
 import java.util.Date;
 
 public class RegRequest {
+
 	// 이메일, 비밀번호, 비밀번호 확인, 이름
 	private String email;
 	private String password;
@@ -10,7 +11,6 @@ public class RegRequest {
 	private String name;
 
 	public RegRequest() {
-
 	}
 
 	public RegRequest(String email, String password, String confirmPassword, String name) {
@@ -51,12 +51,12 @@ public class RegRequest {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	// 비밀번호와 비밀번호 확인 일치여부
+	
+	// 비밀번호 비밀번호 일치여부
 	public boolean isPwRePwEquals() {
-		return this.password.equals(this.confirmPassword);
+		return password.equals(confirmPassword);
 	}
-
+	
 	// RegRequest -> Member
 	public Member toMember() {
 		return new Member(0, email, password, name, new Date());
