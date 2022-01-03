@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+
+	<context:annotation-config/>
+
+	<bean class="mm.config.JavaConfigSub"/>
+
+	<bean id="memberDao"
+		  class="mm.dao.MemberDao"/>
+	<!-- </bean> -->
+	
+	<bean id="regService"
+		  class="mm.service.MemberRegService">
+		  
+		  <!-- 생성자 주입 방식 -->
+		  <constructor-arg ref="memberDao"/>
+		  	<!-- <ref bean="memberDao"/> -->		  
+		  <!-- </constructor-arg> -->
+	</bean>
+	
+
+
+</beans>
