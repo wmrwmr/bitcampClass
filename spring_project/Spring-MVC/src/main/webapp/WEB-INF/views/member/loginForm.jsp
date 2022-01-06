@@ -11,7 +11,7 @@
 	<h1>login Form</h1>
 	<hr>
 	<form method="post">
-		<input type="hidden" name="url" value="${url}">
+		<input type="hidden" name="rurl" value="${url}">
 		아이디 <input type="text" name="uid"> <br>
 		비밀번호 <input type="password" name="pw"> <br>
 		<input type="submit">

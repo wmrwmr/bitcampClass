@@ -26,6 +26,48 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" >
+			<beans:value>utf-8</beans:value>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="authCheckInterceptor"
+				class="com.bitcamp.mvc.intercepter.AuthCheckInterceptor"/>
+	
+	
+	<interceptors>
+	
+		<interceptor>
+			<mapping path="/mypage/**"/>
+			<beans:bean class="com.bitcamp.mvc.intercepter.TestInterceptor1"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/mypage/**"/>
+			<beans:bean class="com.bitcamp.mvc.intercepter.TestInterceptor2"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/mypage/**"/>
+			<beans:bean class="com.bitcamp.mvc.intercepter.TestInterceptor3"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/mypage/**"/>
+			<exclude-mapping path="/mypage/help/**"/>
+			<beans:ref bean="authCheckInterceptor"/>
+		</interceptor>
+		
+	</interceptors>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	<!-- <beans:bean id="helloService" class="com.bitcamp.mvc.HelloService"/> -->
